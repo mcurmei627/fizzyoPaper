@@ -15,7 +15,7 @@
      \usepackage[final]{neurips_2018}
 
 % to avoid loading the natbib package, add option nonatbib:
-%     \usepackage[nonatbib]{neurips_2018}
+\usepackage[nonatbib]{neurips_2018}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -26,7 +26,7 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 
-\title{Formatting instructions for NeurIPS 2018}
+\title{A data-driven study of cystic fibrosis treatment: identifying sub-types of physiotherapy style and physical activity using unsupervised clustering}
 
 % The \author macro works with any number of authors. There are two commands
 % used to separate the names and addresses of multiple authors: \And and \AND.
@@ -68,335 +68,136 @@
 }
 
 \begin{document}
-% \nipsfinalcopy is no longer used
+
 
 \maketitle
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch (3~picas) on
-  both the left- and right-hand margins. Use 10~point type, with a vertical
-  spacing (leading) of 11~points.  The word \textbf{Abstract} must be centered,
-  bold, and in point size 12. Two line spaces precede the abstract. The abstract
-  must be limited to one paragraph.
+  Children and young people with cystic fibrosis (CYPwCF) are prescribed physiotherapy including daily airway clearance techniques (ACT), and being physically active as part of their treatment. Little is known about how CYPwCF follow this advice in their everyday lives. Physiotherapy has evolved over the decades without this detailed data. Such data is now being collected as part of Project Fizzyo which is the largest CF physiotherapy trial in the UK to date. The data comes from novel pressure sensors attached to existing ACT devices which remotely measure breathing patterns during normal treatments, and Fitbit activity trackers which monitor physical activity patterns. In close collaboration with clinical experts, we quantify and characterise this unique ACT and activity data by creating custom features of the waveforms. We identify sub-types with unsupervised learning, with k-means clustering achieving the best performance. We find 4 clusters of ACT data which are sensitive enough to track interventions in ACT routine, 4 clusters of steps data, and 5 clusters of heartrate data, which are clinically meaningful sub-types.
 \end{abstract}
 
-\section{Submission of papers to NeurIPS 2018}
+\section{Problem overview}
 
-NeurIPS requires electronic submissions.  The electronic submission site is
-\begin{center}
-  \url{https://cmt.research.microsoft.com/NeurIPS2018/}
-\end{center}
+Cystic Fibrosis (CF) is a chronic life limiting illness affecting approximately 1 in 2500 babies born globally. CF is a genetic disorder that mainly affects the lungs, where excessive thick sticky mucous leads to a cycle of infection, inflammation and lung damage leading to a deterioration in health. Despite recent progress CF remains progressive and incurable. In some cases, a lung-transplant is performed, but only half of the current CF population are expected to live to over 40 years old [ref].  
 
-Please read the instructions below carefully and follow them faithfully.
+To clear the lungs of excess mucous, daily physiotherapy airway clearance techniques (ACT) are prescribed. The physiotherapy exercises involve a series of forced exhalations into a handheld device  followed by a huff and cough to improve mucociliary clearance and expel mucous; an exercise which is performed repeatedly [ref to guideline?]. For children with CF, the physiotherapy is burdensome, with some reporting that they dislike their physiotherapy more than they dislike the disease itself [ref]. Physiotherapists also encourage children to have a physically active lifestyle [ref to guideline?]. Until recently adherence to physiotherapy recommendations was only assessed via questionnaire or self report which is known to be inaccurate. The evolution of CF physiotherapy of the decades has not been informed by this important evidence.  
 
-\subsection{Style}
+Bespoke pressure sensors were developed to attach to existing ACT devices and remotely monitor ACT breathing patterns. One way to reduce the treatment burden of ACT may be by using gamification. To investigate if gamification can change physiotherapy adherence or patterns, bespoke games were developed which are driven by pressure changes measured with the sensor [ref 1: verbal description, ref 2: video demonstrating the point https://customers.microsoft.com/en-us/story/731791-fizzyo]. Physical activity was also assessed using Fitbit activity trackers. 
 
-Papers to be submitted to NeurIPS 2018 must be prepared according to the
-instructions presented here. Papers may only be up to eight pages long,
-including figures. Additional pages \emph{containing only acknowledgments and/or
-  cited references} are allowed. Papers that exceed eight pages of content
-(ignoring references) will not be reviewed, or in any other way considered for
-presentation at the conference.
+ 145 CYPwCF participated in the study [NREC:18-LO-1038] to quantify ACT and physical activity patterns (via wearing of a Fitbit activity tracker), and to study the effects of gamification. This is the largest CF physiotherapy trial in the UK [ref to meta-analysis of CF trials, or previously largest studies?], collecting completely novel daily data about how children follow physiotherapy advice in their everyday lives. The broader goals of the study are to link physiotherapy behaviour patterns with clinical outcomes, in order to optimise and personalise treatment. In this paper we describe the challenge of i) quantifying ACT pressure sensor data and Fitbit activity data by creating custom features of the waveforms, and ii) discovering sub-types of ACTs and activity using clustering techniques. These daily sub-types can be tracked over time, as interventions such as gaming are introduced.   
+\section{Methods}
+\subsection{Trial design and analysis approach}
+We used an interrupted time series design for the 18 month trial, so the effect on ACT patterns of introducing and removing an intervention can be assessed [ref to details of trial design]. Interventions include introducing feedback to participants on their ACT (number of breaths) on a tablet application, introducing games, and later removing these interventions. The data presented here is from the first 8x months of the trial. Participants are: 65x males and 80x females ranging in age from 6-16 years old, mainly from the ethnic group primarily affected by CF (Caucasian), from 3 London hospitals, and are voluntarily part of the study. All data is completely de-identified for analysis to all researchers. 
+ 
+Our analysis seeks to find patterns in physiotherapy data. Once these patterns are known, they can be linked with clinical outcomes to determine if certain behaviour patterns are preferable. We do not impose pre-conceived labels such as “good” or “bad” on waveforms, thus we leave open the possibility that what is currently prescribed may not be optimal. As such, the data is unlabelled and we use unsupervised learning approach to achieve this. Unsupervised clustering has been used to find subtypes in physical activity data \cite{physical_activity_patterns_2017} and pressure data relating to respiratory disease []. 
 
-The margins in 2018 are the same as since 2007, which allow for $\sim$$15\%$
-more words in the paper compared to earlier years.
+A high-scale data analysis and exploration pipeline was built in R in a secure analysis environment.  
 
-Authors are required to use the NeurIPS \LaTeX{} style files obtainable at the
-NeurIPS website as indicated below. Please make sure you use the current files
-and not previous versions. Tweaking the style files may be grounds for
-rejection.
+\subsection{Collaboration, trust and interpretability}
+Many applications of machine learning to medical data fail to explain how (if at all) the expertise of clinicians has been included [ref https://www.nature.com/articles/s41598-018-29523-2]. To address the issues that arise from a lack of collaboration [ref to stuff on collaboration and interpretability] our methodology involves close collaboration between data scientists and CF experts, making every data decision jointly. We use a novel approach of involving at least one clinical expert in engineering “stand-ups” every day over the course of building the data analysis pipeline (7 months). We only consider features that are meaningful to clinicians, and we balance traditional statistical evaluation metrics, with what is interpretable to clinicians.  
 
-\subsection{Retrieval of style files}
+\subsection{Feature engineering}
+\subsubsection{Breath data description}
+An ACT treatment commonly involves around 10 sets of 10 exhalation breaths into the ACT device. Each set loosens mucous, so that after the set the participant can huff and cough to expel it. The treatment may be performed once or twice per day; participants do not have identical prescriptions. The ACT device is fitted with a wireless pressure sensor sampling at 10 Hz, recording a pressure value (cm H2O) and its time stamp. Participants each used 1-3 of 4 different ACT devices compatible with the sensor; the Acapella, Aerobia, PariPEP and AstraPEP.  
+\subsubsection{Processing breath data}
+Several pre-processing steps were performed on the data which were a function of the custom sensor used: including assembling data packets and removing duplicate values. The sensor also introduced significant non-linear baseline drift. Because of the asymmetrical nature of the exhalation peaks and sparsity of the signal, we used a sparsity-based de-noising approach with an asymmetry factor, called BEADS [ref https://www.sciencedirect.com/science/article/abs/pii/S0169743914002032?via 3Dihub], which is designed for use with chromatogram waveforms which have a similar form. 
+% figure 1
+In total, we recorded 5x,000 sensor readings. This includes data from every time the ACT sensor was turned on, including for testing and demonstration. Once we removed readings shorter than 15 seconds, treatments with no breath exhalations, and situations with sensor misuse/malfunction, we were left with 2x,000 ACT treatments for analysis. 
 
-The style files for NeurIPS and other conference information are available on
-the World Wide Web at
-\begin{center}
-  \url{http://www.neurips.cc/}
-\end{center}
-The file \verb+neurips_2018.pdf+ contains these instructions and illustrates the
-various formatting requirements your NeurIPS paper must satisfy.
+\subsubsection{Featurising breath data}
+% figure 2
+The defining characteristics of ACT treatments were summarised in a range of features (variables): breath count, breath duration, breath amplitude, and treatment duration. In order to derive these features, our breath identification algorithm recognises breaths composed of multiple peaks, and having breath shapes which are characteristic of the 3 different ACT devices used in the study. In addition to mean breath amplitude, we use amplitude standard deviation as a feature, in order to capture inconsistency or disorderliness in physiotherapy. We also identified how many discernible sets were apparent in the treatment. These features are on a per-treatment level. 
 
-The only supported style file for NeurIPS 2018 is \verb+neurips_2018.sty+,
-rewritten for \LaTeXe{}.  \textbf{Previous style files for \LaTeX{} 2.09,
-  Microsoft Word, and RTF are no longer supported!}
+The aforementioned features capture the characteristics of existing treatments. However it is common for prescribed treatments to be skipped, and days with no treatments is an important signal itself. Several features were derived which capture missing data: treatment adherence to date, skipped days since last treatment, rolling adherence over 7 days. These features are on a per-day level, as participants are prescribed 1 or 2 treatments per day. 
 
-The \LaTeX{} style file contains three optional arguments: \verb+final+, which
-creates a camera-ready copy, \verb+preprint+, which creates a preprint for
-submission to, e.g., arXiv, and \verb+nonatbib+, which will not load the
-\verb+natbib+ package for you in case of package clash.
 
-\paragraph{New preprint option for 2018}
-If you wish to post a preprint of your work online, e.g., on arXiv, using the
-NeurIPS style, please use the \verb+preprint+ option. This will create a
-nonanonymized version of your work with the text ``Preprint. Work in progress.''
-in the footer. This version may be distributed as you see fit. Please \textbf{do
-  not} use the \verb+final+ option, which should \textbf{only} be used for
-papers accepted to NeurIPS.
+\subsubsection{Featurising physical activity data}
+The Fitbit activity tracker (Fitbit AltaHR) provides each participant’s step count per minute. While real-time heartbeat data would allow for a detailed analysis of heartrate waveforms, the Fitbit only provides average heartrate, with a variable sampling frequency ranging from 3 to 12 values per minute. To achieve consistent frequency and comparable values, the heartrate values are averaged for each minute.   
 
-At submission time, please omit the \verb+final+ and \verb+preprint+
-options. This will anonymize your submission and add line numbers to aid
-review. Please do \emph{not} refer to these line numbers in your paper as they
-will be removed during generation of camera-ready copies.
+Mindful of these data limitations, we extract high-level patterns from the minute averaged waveforms at a day level. The heartrate and steps datasets are featurised using summary statistics per day using counts, frequency and interval values such as number of minutes in moderate to vigorous intensity physical activities (MVPA) (heartrate above 120 bpm) per day, step cadence (number of steps/minutes of wear) at day level, and number of hours with more than 500 steps at day level. 
 
-The file \verb+neurips_2018.tex+ may be used as a ``shell'' for writing your
-paper. All you have to do is replace the author, title, abstract, and text of
-the paper with your own.
+% figure 3
 
-The formatting instructions contained in these style files are summarized in
-Sections \ref{gen_inst}, \ref{headings}, and \ref{others} below.
+\subsubsection{Missing activity data}
 
-\section{General formatting instructions}
-\label{gen_inst}
+To account for missing data during times that the Fitbit is not worn, the wear percent of the Fitbit is calculated from the heartrate values. This measure is used to select only days with a substantial portion of data for the day (80% of wear time from 6 am to 6 pm) for analysis. The wear time is also used to normalise some features and to obtain step cadence for minutes where heartrate data is present. 
 
-The text must be confined within a rectangle 5.5~inches (33~picas) wide and
-9~inches (54~picas) long. The left margin is 1.5~inch (9~picas).  Use 10~point
-type with a vertical spacing (leading) of 11~points.  Times New Roman is the
-preferred typeface throughout, and will be selected for you by default.
-Paragraphs are separated by \nicefrac{1}{2}~line space (5.5 points), with no
-indentation.
+\subsubsection{Clustering to find sub-types}  
 
-The paper title should be 17~point, initial caps/lower case, bold, centered
-between two horizontal rules. The top rule should be 4~points thick and the
-bottom rule should be 1~point thick. Allow \nicefrac{1}{4}~inch space above and
-below the title to rules. All pages should start at 1~inch (6~picas) from the
-top of the page.
+All features were verified by clinicians as being meaningful or potentially meaningful. We perform a correlation analysis on all features and removed features which were highly correlated. We use the Hopkins statistic [ref] to measure clustering tendency. Features with a Gaussian distribution are normalised to have mean =0 and standard deviation 1. In order to visualise the results, we use dimensionality reduction. We use the first two principle components from principal component analysis [ref], Uniform Manifold Approximation and Projection (UMAP), and t-Distributed Stochastic Neighbor Embedding (T-SNE). We identify outliers using xxx methods and remove less than 2\%, with these cases being recognised as device malfunctions or unusual human behaviour.  
 
-For the final version, authors' names are set in boldface, and each name is
-centered above the corresponding address. The lead author's name is to be listed
-first (left-most), and the co-authors' names (if different address) are set to
-follow. If there is only one co-author, list both author and co-author side by
-side.
+We employ the following clustering methods: k-means, Density-based spatial clustering of applications with noise (DBSCAN) and hierarchical clustering.  
 
-Please pay special attention to the instructions in Section \ref{others}
-regarding figures, tables, acknowledgments, and references.
+\section{Results}
+\subsection{Clustering breath waveforms}
+\subsubsection{Feature selection for clustering}
+Some features were excluded from clustering, but provide interesting physiotherapy insights.  
+The number of sets in a treatment were expected to be very influential in clustering, as a regular pattern of sets shows close adherence to physiotherapy advice. However we found that less than 20xx\% of treatments had discernible sets, so this feature could not be used
 
-\section{Headings: first level}
-\label{headings}
+% table 1
 
-All headings should be lower case (except for first word and proper nouns),
-flush left, and bold.
+\subsubsection{ACT clustering results}
+The results of the four techniques used for clustering are show in table x. K-means was found to perform best because we liked the way..… K-means is a simple 
 
-First-level headings should be in 12-point type.
+% table 2
+% table 3
+% figure 4
 
-\subsection{Headings: second level}
+\subsubsection{ACT clustering validation}
 
-Second-level headings should be in 10-point type.
+We have checked the clustering stability on different data partitions.  Random sampling of the data (80\% of data) and using k-means clustering provided very similar results comparing to clustering on the full dataset:  shape of the clusters, cluster centroids as well as Silhouette Coefficients and Calinski-Harabaz Index  (2200 v 1770 respectively) are comparable. 
+% figure
+We also have done validation of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters. Figure xx shows the same patient trajectory for the Clustering A and Clustering B. Clustering B uses breath amplitude features (mean and standard dev) as well as breathRollWeekAdherenceScore in addition to features that Clustering A uses. Notable that  once computer gaming is introduced to ACT in both cases A and B the same patient moves from cluster with “expected” breath counts per ACT to cluster characterized by much bigger breath counts. This validates that there is a change in patient’s behaviour that we’ve captured. Additional sdBreathAmplitude feature make results more explainable from clinical point of view as original cluster for the patient in Clustering B was characterized by centroid with the biggest sdBreathAmplitude value. 
+% figure
 
-\subsubsection{Headings: third level}
+\subsection{Clustering physical activity waveforms} 
 
-Third-level headings should be in 10-point type.
+Clustering of physical activity data was used to extract daily patterns from the steps and heartrate waveforms that can be utilised to individually characterise the physical activity levels and patterns of individual patients. The different clusters should extract some more complex characteristics than the ones which could be obtained by simply combining some of the extracted features. 
 
-\paragraph{Paragraphs}
+\subsubsection{Steps clusters}
 
-There is also a \verb+\paragraph+ command available, which sets the heading in
-bold, flush left, and inline with the text, with the heading followed by 1\,em
-of space.
-
-\section{Citations, figures, tables, references}
-\label{others}
-
-These instructions apply to everyone.
-
-\subsection{Citations within the text}
-
-The \verb+natbib+ package will be loaded for you by default.  Citations may be
-author/year or numeric, as long as you maintain internal consistency.  As to the
-format of the references themselves, any style is acceptable as long as it is
-used consistently.
-
-The documentation for \verb+natbib+ may be found at
-\begin{center}
-  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-Of note is the command \verb+\citet+, which produces citations appropriate for
-use in inline text.  For example,
-\begin{verbatim}
-   \citet{hasselmo} investigated\dots
-\end{verbatim}
-produces
-\begin{quote}
-  Hasselmo, et al.\ (1995) investigated\dots
-\end{quote}
-
-If you wish to load the \verb+natbib+ package with options, you may add the
-following before loading the \verb+neurips_2018+ package:
-\begin{verbatim}
-   \PassOptionsToPackage{options}{natbib}
-\end{verbatim}
-
-If \verb+natbib+ clashes with another package you load, you can add the optional
-argument \verb+nonatbib+ when loading the style file:
-\begin{verbatim}
-   \usepackage[nonatbib]{neurips_2018}
-\end{verbatim}
-
-As submission is double blind, refer to your own published work in the third
-person. That is, use ``In the previous work of Jones et al.\ [4],'' not ``In our
-previous work [4].'' If you cite your other papers that are not widely available
-(e.g., a journal paper under review), use anonymous author names in the
-citation, e.g., an author of the form ``A.\ Anonymous.''
-
-\subsection{Footnotes}
-
-Footnotes should be used sparingly.  If you do require a footnote, indicate
-footnotes with a number\footnote{Sample of the first footnote.} in the
-text. Place the footnotes at the bottom of the page on which they appear.
-Precede the footnote with a horizontal rule of 2~inches (12~picas).
-
-Note that footnotes are properly typeset \emph{after} punctuation
-marks.\footnote{As in this example.}
-
-\subsection{Figures}
-
-\begin{figure}
-  \centering
-  \fbox{\rule[-.5cm]{0cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-  \caption{Sample figure caption.}
-\end{figure}
-
-All artwork must be neat, clean, and legible. Lines should be dark enough for
-purposes of reproduction. The figure number and caption always appear after the
-figure. Place one line space before the figure caption and one line space after
-the figure. The figure caption should be lower case (except for first word and
-proper nouns); figures are numbered consecutively.
-
-You may use color figures.  However, it is best for the figure captions and the
-paper body to be legible if the paper is printed in either black/white or in
-color.
-
-\subsection{Tables}
-
-All tables must be centered, neat, clean and legible.  The table number and
-title always appear before the table.  See Table~\ref{sample-table}.
-
-Place one line space before the table title, one line space after the
-table title, and one line space after the table. The table title must
-be lower case (except for first word and proper nouns); tables are
-numbered consecutively.
-
-Note that publication-quality tables \emph{do not contain vertical rules.} We
-strongly suggest the use of the \verb+booktabs+ package, which allows for
-typesetting high-quality, professional tables:
-\begin{center}
-  \url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-This package was used to typeset Table~\ref{sample-table}.
-
-\begin{table}
-  \caption{Sample table title}
-  \label{sample-table}
-  \centering
-  \begin{tabular}{lll}
-    \toprule
-    \multicolumn{2}{c}{Part}                   \\
-    \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
-    \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\section{Final instructions}
-
-Do not change any aspects of the formatting parameters in the style files.  In
-particular, do not modify the width or length of the rectangle the text should
-fit into, and do not change font sizes (except perhaps in the
-\textbf{References} section; see below). Please note that pages should be
-numbered.
-
-\section{Preparing PDF files}
-
-Please prepare submission files with paper size ``US Letter,'' and not, for
-example, ``A4.''
-
-Fonts were the main cause of problems in the past years. Your PDF file must only
-contain Type 1 or Embedded TrueType fonts. Here are a few instructions to
-achieve this.
+The following features were used for clustering steps: number of minutes with step count higher than 100 for at least 5 consecutive minutes, the mean of total step count per hour, the step cadence for the periods in MVPA and the number of hours in the day with 0<steps count < 500. Features were selected as a result of feature selection, correlation and outlier analysis. Four clusters were found by Kmeans with the following characteristics: 
 
 \begin{itemize}
-
-\item You should directly generate PDF files using \verb+pdflatex+.
-
-\item You can check which fonts a PDF files uses.  In Acrobat Reader, select the
-  menu Files$>$Document Properties$>$Fonts and select Show All Fonts. You can
-  also use the program \verb+pdffonts+ which comes with \verb+xpdf+ and is
-  available out-of-the-box on most Linux machines.
-
-\item The IEEE has recommendations for generating PDF files whose fonts are also
-  acceptable for NeurIPS. Please see
-  \url{http://www.emfield.org/icuwb2010/downloads/IEEE-PDF-SpecV32.pdf}
-
-\item \verb+xfig+ "patterned" shapes are implemented with bitmap fonts.  Use
-  "solid" shapes instead.
-
-\item The \verb+\bbold+ package almost always uses bitmap fonts.  You should use
-  the equivalent AMS Fonts:
-\begin{verbatim}
-   \usepackage{amsfonts}
-\end{verbatim}
-followed by, e.g., \verb+\mathbb{R}+, \verb+\mathbb{N}+, or \verb+\mathbb{C}+
-for $\mathbb{R}$, $\mathbb{N}$ or $\mathbb{C}$.  You can also use the following
-workaround for reals, natural and complex:
-\begin{verbatim}
-   \newcommand{\RR}{I\!\!R} %real numbers
-   \newcommand{\Nat}{I\!\!N} %natural numbers
-   \newcommand{\CC}{I\!\!\!\!C} %complex numbers
-\end{verbatim}
-Note that \verb+amsfonts+ is automatically loaded by the \verb+amssymb+ package.
-
+\item XS - this cluster contains waveforms with very little steps activity or much missing step data 
+\item S - moderate step activity and consistent cadence throughout the day with very few periods of high step activity 
+\item M - consistent moderate to high step rate across the day with period of sustained high step activity  
+\item L - High step rate throughout the day with longer periods of sustained high step activity
 \end{itemize}
+%figure
+%table
 
-If your file contains type 3 fonts or non embedded TrueType fonts, we will ask
-you to fix it.
+subsubsection{Heartrate clusters}
 
-\subsection{Margins in \LaTeX{}}
+The number of minutes with heartrate higher than 120, coefficient of variation for heartrate values at a day level, number of time heartrate goes above 100 and 120 and the median average hourly heartrate were used as features for the heartrate clusters. Five clusters were found by Kmeans with the following chacteristics: 
+\begin{itemize}
+\item S - Small heartrate values and consistently below 120 
+\item M - Consistent variations around 100 with very few spikes in heartrate values 
+\item M1 - Waveform with high variability and periods with spikes above 120 and fluctuations above the 120 mark 
+\item M2 - Consistent variations around 100 with spikes in values above 120 
+\item L - Large values around and above 120 
+\end{itemize}
+%figure
+%table
 
-Most of the margin problems come from figures positioned by hand using
-\verb+\special+ or other commands. We suggest using the command
-\verb+\includegraphics+ from the \verb+graphicx+ package. Always specify the
-figure width as a multiple of the line width as in the example below:
-\begin{verbatim}
-   \usepackage[pdftex]{graphicx} ...
-   \includegraphics[width=0.8\linewidth]{myfile.pdf}
-\end{verbatim}
-See Section 4.4 in the graphics bundle documentation
-(\url{http://mirrors.ctan.org/macros/latex/required/graphics/grfguide.pdf})
 
-A number of width problems arise when \LaTeX{} cannot properly hyphenate a
-line. Please give LaTeX hyphenation hints using the \verb+\-+ command when
-necessary.
+\subsubsection{Fitbit cluster validation }
 
-\subsubsection*{Acknowledgments}
+The steps and heartrate clusters were validated with the clinical experts. Individual waveforms were manually inspected together with the cluster boundaries to ensure consistency across cluster interpretations and the actual cluster characteristics. Additionally, other features that were not included in the clustering analysis were used to validate the clusters and their interpretations. Certain expected conditions were checked against the cluster labels and plotted using the PCA graph such as Figure Xxx below. 
 
-Use unnumbered third level headings for the acknowledgments. All acknowledgments
-go at the end of the paper. Do not include acknowledgments in the anonymized
-submission, only in the final paper.
 
-\section*{References}
+\section{Discussion and conclusion} 
 
-References follow the acknowledgments. Use unnumbered first-level heading for
-the references. Any choice of citation style is acceptable as long as you are
-consistent. It is permissible to reduce the font size to \verb+small+ (9 point)
-when listing the references. {\bf Remember that you can use more than eight
-  pages as long as the additional pages contain \emph{only} cited references.}
-\medskip
+We have developed a technique of feature engineering and clustering analysis to bring insights into novel data about 
 
-\small
+We have demonstrated feature engineering and clustering analysis on novel data from a cystic fibrosis trial.  
 
-[1] Alexander, J.A.\ \& Mozer, M.C.\ (1995) Template-based algorithms for
-connectionist rule extraction. In G.\ Tesauro, D.S.\ Touretzky and T.K.\ Leen
-(eds.), {\it Advances in Neural Information Processing Systems 7},
-pp.\ 609--616. Cambridge, MA: MIT Press.
+We have analysed the first 7 months of data in the 18 month...
 
-[2] Bower, J.M.\ \& Beeman, D.\ (1995) {\it The Book of GENESIS: Exploring
-  Realistic Neural Models with the GEneral NEural SImulation System.}  New York:
-TELOS/Springer--Verlag.
 
-[3] Hasselmo, M.E., Schnell, E.\ \& Barkai, E.\ (1995) Dynamics of learning and
-recall at excitatory recurrent synapses and cholinergic modulation in rat
-hippocampal region CA3. {\it Journal of Neuroscience} {\bf 15}(7):5249-5262.
+
+\bibliographystyle{abbrv}
+% include your .bib file
+\bibliography{fizzyo}
 
 \end{document}
