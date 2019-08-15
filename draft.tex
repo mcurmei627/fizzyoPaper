@@ -25,6 +25,7 @@
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
+\usepackage{graphicx}
 
 \title{A data-driven study of cystic fibrosis treatment: identifying sub-types of physiotherapy style and physical activity using unsupervised clustering}
 
@@ -36,14 +37,15 @@
 % authors names on the first line, and the last on the second line, try using
 % \AND instead of \And before the third author name.
 
-\author{%
-  David S.~Hippocampus\thanks{Use footnote for providing further information
-    about author (webpage, alternative address)---\emph{not} for acknowledging
-    funding agencies.} \\
-  Department of Computer Science\\
-  Cranberry-Lemon University\\
-  Pittsburgh, PA 15213 \\
-  \texttt{hippo@cs.cranberry-lemon.edu} \\
+%\author{%
+%  David S.~Hippocampus\thanks{Use footnote for providing further information
+%    about author (webpage, alternative address)---\emph{not} for acknowledging
+%    funding agencies.} \\
+%    I think we need to keep anonymous for our submission\\
+%  Department of Computer Science\\
+%  Cranberry-Lemon University\\
+%  Pittsburgh, PA 15213 \\
+%  \texttt{hippo@cs.cranberry-lemon.edu} \\
   % examples of more authors
   % \And
   % Coauthor \\
@@ -65,7 +67,7 @@
   % Affiliation \\
   % Address \\
   % \texttt{email} \\
-}
+%}
 
 \begin{document}
 
@@ -73,21 +75,21 @@
 \maketitle
 
 \begin{abstract}
-  Children and young people with cystic fibrosis (CYPwCF) are prescribed physiotherapy including daily airway clearance techniques (ACT), and being physically active as part of their treatment. Little is known about how CYPwCF follow this advice in their everyday lives. Physiotherapy has evolved over the decades without this detailed data. Such data is now being collected as part of Project Fizzyo which is the largest CF physiotherapy trial in the UK to date. The data comes from novel pressure sensors attached to existing ACT devices which remotely measure breathing patterns during normal treatments, and Fitbit activity trackers which monitor physical activity patterns. In close collaboration with clinical experts, we quantify and characterise this unique ACT and activity data by creating custom features of the waveforms. We identify sub-types with unsupervised learning, with k-means clustering achieving the best performance. We find 4 clusters of ACT data which are sensitive enough to track interventions in ACT routine, 4 clusters of steps data, and 5 clusters of heartrate data, which are clinically meaningful sub-types.
+  Children and young people with cystic fibrosis (CYPwCF) are prescribed physiotherapy including daily airway clearance techniques (ACT), and being physically active as part of their treatment. Little is known about how CYPwCF follow this advice in their everyday lives. Physiotherapy has evolved over the decades without this detailed data. Such data is now being collected as part of Project [anonymous] which is the largest CF physiotherapy trial in the UK to date. The data comes from novel pressure sensors attached to existing ACT devices which remotely measure breathing patterns during normal treatments, and Fitbit activity trackers which monitor physical activity patterns. In close collaboration with clinical experts, we quantify and characterise this unique ACT and activity data by creating custom features of the waveforms. We identify sub-types with unsupervised learning, with k-means clustering achieving the best performance. We find 4 clusters of ACT data which are sensitive enough to track interventions in ACT routine, 4 clusters of steps data, and 5 clusters of heartrate data, which are clinically meaningful sub-types.
 \end{abstract}
 
 \section{Problem overview}
 
-Cystic Fibrosis (CF) is a chronic life limiting illness affecting approximately 1 in 2500 babies born globally. CF is a genetic disorder that mainly affects the lungs, where excessive thick sticky mucous leads to a cycle of infection, inflammation and lung damage leading to a deterioration in health. Despite recent progress CF remains progressive and incurable. In some cases, a lung-transplant is performed, but only half of the current CF population are expected to live to over 40 years old [ref].  
+Cystic Fibrosis (CF) is a chronic life limiting illness affecting approximately 1 in 2500 babies born globally. CF is a genetic disorder that mainly affects the lungs, where excessive thick sticky mucous leads to a cycle of infection, inflammation and lung damage leading to a deterioration in health. Despite recent progress CF remains progressive and incurable. In some cases, a lung-transplant is performed, but only half of the current CF population are expected to live to over 40 years old [*******UCL****** ref to this or similar].  
 
-To clear the lungs of excess mucous, daily physiotherapy airway clearance techniques (ACT) are prescribed. The physiotherapy exercises involve a series of forced exhalations into a handheld device  followed by a huff and cough to improve mucociliary clearance and expel mucous; an exercise which is performed repeatedly [ref to guideline?]. For children with CF, the physiotherapy is burdensome, with some reporting that they dislike their physiotherapy more than they dislike the disease itself [ref]. Physiotherapists also encourage children to have a physically active lifestyle [ref to guideline?]. Until recently adherence to physiotherapy recommendations was only assessed via questionnaire or self report which is known to be inaccurate. The evolution of CF physiotherapy of the decades has not been informed by this important evidence.  
+To clear the lungs of excess mucous, daily physiotherapy airway clearance techniques (ACT) are prescribed. The physiotherapy exercises involve a series of forced exhalations into a handheld device  followed by a huff and cough to improve mucociliary clearance and expel mucous; an exercise which is performed repeatedly [*******UCL****** ref to guideline?]. For children with CF, the physiotherapy is burdensome, with some reporting that they dislike their physiotherapy more than they dislike the disease itself [*******UCL****** ref? This was from a survey that Jackie mentioned]. Physiotherapists also encourage children to have a physically active lifestyle [*******UCL****** ref to why physical activity is good]. Until recently adherence to physiotherapy recommendations was only assessed via questionnaire or self report which is known to be inaccurate [*******UCL****** ref]. The evolution of CF physiotherapy of the decades has not been informed by this important evidence.  
 
-Bespoke pressure sensors were developed to attach to existing ACT devices and remotely monitor ACT breathing patterns. One way to reduce the treatment burden of ACT may be by using gamification. To investigate if gamification can change physiotherapy adherence or patterns, bespoke games were developed which are driven by pressure changes measured with the sensor [ref 1: verbal description, ref 2: video demonstrating the point https://customers.microsoft.com/en-us/story/731791-fizzyo]. Physical activity was also assessed using Fitbit activity trackers. 
+Bespoke pressure sensors were developed to attach to existing ACT devices and remotely monitor ACT breathing patterns. One way to reduce the treatment burden of ACT may be by using gamification. To investigate if gamification can change physiotherapy adherence or patterns, bespoke games were developed which are driven by pressure changes measured with the sensor [ref 1: verbal description of games, ref 2: video demonstrating the point https://customers.microsoft.com/en-us/story/731791-fizzyo, removing any identifyin names in the bibliography]. Physical activity was also assessed using Fitbit activity trackers. 
 
- 145 CYPwCF participated in the study [NREC:18-LO-1038] to quantify ACT and physical activity patterns (via wearing of a Fitbit activity tracker), and to study the effects of gamification. This is the largest CF physiotherapy trial in the UK [ref to meta-analysis of CF trials, or previously largest studies?], collecting completely novel daily data about how children follow physiotherapy advice in their everyday lives. The broader goals of the study are to link physiotherapy behaviour patterns with clinical outcomes, in order to optimise and personalise treatment. In this paper we describe the challenge of i) quantifying ACT pressure sensor data and Fitbit activity data by creating custom features of the waveforms, and ii) discovering sub-types of ACTs and activity using clustering techniques. These daily sub-types can be tracked over time, as interventions such as gaming are introduced.   
+ 145 CYPwCF participated in the study [NREC:18-LO-1038] to quantify ACT and physical activity patterns (via wearing of a Fitbit activity tracker), and to study the effects of gamification. This is the largest CF physiotherapy trial in the UK [*******UCL****** ref to meta-analysis of CF trials, or previously largest studies, or any previous data-driven studies?], collecting completely novel daily data about how children follow physiotherapy advice in their everyday lives. The broader goals of the study are to link physiotherapy behaviour patterns with clinical outcomes, in order to optimise and personalise treatment. In this paper we describe the challenge of i) quantifying ACT pressure sensor data and Fitbit activity data by creating custom features of the waveforms, and ii) discovering sub-types of ACTs and activity using clustering techniques. These daily sub-types can be tracked over time, as interventions such as gaming are introduced.   
 \section{Methods}
 \subsection{Trial design and analysis approach}
-We used an interrupted time series design for the 18 month trial, so the effect on ACT patterns of introducing and removing an intervention can be assessed [ref to details of trial design]. Interventions include introducing feedback to participants on their ACT (number of breaths) on a tablet application, introducing games, and later removing these interventions. The data presented here is from the first 8x months of the trial. Participants are: 65x males and 80x females ranging in age from 6-16 years old, mainly from the ethnic group primarily affected by CF (Caucasian), from 3 London hospitals, and are voluntarily part of the study. All data is completely de-identified for analysis to all researchers. 
+We used an interrupted time series design for the 18 month trial, so the effect on ACT patterns of introducing and removing an intervention can be assessed [[*******UCL****** ref to details of trial design,is this sufficient? NREC:18-LO-1038 ]. Interventions include introducing feedback to participants on their ACT (number of breaths) on a tablet application, introducing games, and later removing these interventions. The data presented here is from the first 8x months of the trial. Participants are: [*******UCL****** exact numbers] 65x males and 80x females ranging in age from 6-16 years old, from 3 London hospitals, and are voluntarily part of the study. All data is completely de-identified for analysis to researchers. 
  
 Our analysis seeks to find patterns in physiotherapy data. Once these patterns are known, they can be linked with clinical outcomes to determine if certain behaviour patterns are preferable. We do not impose pre-conceived labels such as “good” or “bad” on waveforms, thus we leave open the possibility that what is currently prescribed may not be optimal. As such, the data is unlabelled and we use unsupervised learning approach to achieve this. Unsupervised clustering has been used to find subtypes in physical activity data \cite{physical_activity_patterns_2017} and pressure data relating to respiratory disease []. 
 
@@ -100,7 +102,7 @@ Many applications of machine learning to medical data fail to explain how (if at
 \subsubsection{Breath data description}
 An ACT treatment commonly involves around 10 sets of 10 exhalation breaths into the ACT device. Each set loosens mucous, so that after the set the participant can huff and cough to expel it. The treatment may be performed once or twice per day; participants do not have identical prescriptions. The ACT device is fitted with a wireless pressure sensor sampling at 10 Hz, recording a pressure value (cm H2O) and its time stamp. Participants each used 1-3 of 4 different ACT devices compatible with the sensor; the Acapella, Aerobia, PariPEP and AstraPEP.  
 \subsubsection{Processing breath data}
-Several pre-processing steps were performed on the data which were a function of the custom sensor used: including assembling data packets and removing duplicate values. The sensor also introduced significant non-linear baseline drift. Because of the asymmetrical nature of the exhalation peaks and sparsity of the signal, we used a sparsity-based de-noising approach with an asymmetry factor, called BEADS [ref https://www.sciencedirect.com/science/article/abs/pii/S0169743914002032?via 3Dihub], which is designed for use with chromatogram waveforms which have a similar form. 
+Several pre-processing steps were performed on the data which were a function of the custom sensor used: including assembling data packets and removing duplicate values. The sensor also introduced significant non-linear baseline drift. Because of the asymmetrical nature of the exhalation peaks and sparsity of the signal, we used a sparsity-based de-noising approach with an asymmetry factor, called BEADS \cite{Ning2014}, which is designed for use with chromatogram waveforms which have a similar form. 
 % figure 1
 In total, we recorded 5x,000 sensor readings. This includes data from every time the ACT sensor was turned on, including for testing and demonstration. Once we removed readings shorter than 15 seconds, treatments with no breath exhalations, and situations with sensor misuse/malfunction, we were left with 2x,000 ACT treatments for analysis. 
 
@@ -120,7 +122,7 @@ Mindful of these data limitations, we extract high-level patterns from the minut
 
 \subsubsection{Missing activity data}
 
-To account for missing data during times that the Fitbit is not worn, the wear percent of the Fitbit is calculated from the heartrate values. This measure is used to select only days with a substantial portion of data for the day (80% of wear time from 6 am to 6 pm) for analysis. The wear time is also used to normalise some features and to obtain step cadence for minutes where heartrate data is present. 
+To account for missing data during times that the Fitbit is not worn, the wear percent of the Fitbit is calculated from the heartrate values. This measure is used to select only days with a substantial portion of data for the day (80\% of wear time from 6 am to 6 pm) for analysis. The wear time is also used to normalise some features and to obtain step cadence for minutes where heartrate data is present. 
 
 \subsubsection{Clustering to find sub-types}  
 
@@ -152,11 +154,11 @@ We also have done validation of the clusters by adding or removing features and 
 
 \subsection{Clustering physical activity waveforms} 
 
-Clustering of physical activity data was used to extract daily patterns from the steps and heartrate waveforms that can be utilised to individually characterise the physical activity levels and patterns of individual patients. The different clusters should extract some more complex characteristics than the ones which could be obtained by simply combining some of the extracted features. 
+Clustering of physical activity data was used to extract daily patterns from the steps and heartrate waveforms that can be utilised to individually characterise the physical activity levels and patterns of individual patients. The different clusters should extract more complex characteristics than the ones which could be obtained by simply combining some of the extracted features. 
 
 \subsubsection{Steps clusters}
 
-The following features were used for clustering steps: number of minutes with step count higher than 100 for at least 5 consecutive minutes, the mean of total step count per hour, the step cadence for the periods in MVPA and the number of hours in the day with 0<steps count < 500. Features were selected as a result of feature selection, correlation and outlier analysis. Four clusters were found by Kmeans with the following characteristics: 
+The following features were used for clustering steps: number of minutes with step count higher than 100 for at least 5 consecutive minutes, the mean of total step count per hour, the step cadence for the periods in MVPA and the number of hours in the day with 0 < steps count < 500. Features were selected as a result of feature selection, correlation and outlier analysis. Four clusters were found by Kmeans with the following characteristics: 
 
 \begin{itemize}
 \item XS - this cluster contains waveforms with very little steps activity or much missing step data 
@@ -188,13 +190,37 @@ The steps and heartrate clusters were validated with the clinical experts. Indiv
 
 \section{Discussion and conclusion} 
 
-We have developed a technique of feature engineering and clustering analysis to bring insights into novel data about 
+Project Fizzyo involves collecting novel data about how CF physiotherapy advice, ACTs and physical activity, is adhered to. In close collaboration with CF experts, we develop methods to interrogate this data. We derive clinically meaningful features from ACT and activity (heartrate and steps) waveforms. We use unsupervised clustering to find sub-types of this data. 
 
-We have demonstrated feature engineering and clustering analysis on novel data from a cystic fibrosis trial.  
+Project Fizzyo is an ongoing study, with participation lasting 18 months. 7 months into the trial we do not draw any conclusions, as we do not have an equal number of days of data from patients. Instead, we present a framework for analysis, which will empower clinicians to interpret the impact of interventions such as gamification, and what type of physiotherapy leads to better clinical outcomes.
 
-We have analysed the first 7 months of data in the 18 month...
+\section{Usage of tables and figures}
+\subsection{Figures}
 
+\begin{figure}
+  \centering
+  \caption{Sample figure caption.}
+  \includegraphics[]{sample_fig}
+\end{figure}
 
+\subsection{Tables}
+\begin{table}
+  \caption{Sample table title}
+  \label{sample_table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \cmidrule(r){1-2}
+    Col1 & Col2 & Col3 \\
+    \midrule
+    a & 0 & z\\
+    b & 1 & y \\
+    c & 2 & x \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Here is how you can reference a table \ref{sample_table}
 
 \bibliographystyle{abbrv}
 % include your .bib file
