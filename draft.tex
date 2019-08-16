@@ -226,4 +226,68 @@ Here is how you can reference a table \ref{sample_table}
 % include your .bib file
 \bibliography{fizzyo}
 
+\appendix
+\section{Appendix : Table of physical activity data features}
+
+\begin{table}[h]
+  \caption{Physical activity features}
+  \label{fitbit_features}
+  \centering
+  \begin{tabular}{ |l|l|l| }
+    \toprule
+    \cmidrule(r){1-2}
+    Feature Name & Feature description & Waveform extracted from \\
+    \midrule
+    userif & 1099 & 0.95 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Appendix : Cluster metrics for physical activity data}
+
+The tables below show the metrics for the clusters identified for the physical activity data. 
+
+\textbf{Steps clusters}
+
+Calinski-harabasz index for the steps clusters is 6021.14 .
+
+\begin{table}[h]
+  \caption{Steps clusters Metrics}
+  \label{steps_metrics}
+  \centering
+  \begin{tabular}{ |l|c|c|}
+    \toprule
+    \cmidrule(r){1-2}
+    Cluster name & Cluster Size & Average Silhouette width \\
+    \midrule
+    XS & 1099 & 0.95 \\
+    S & 3942 & 0.34 \\
+    M & 2737 & 0.27 \\
+    L & 1982 & 0.24 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\textbf{Heartrate clusters}
+
+Calinski-harabasz index for the heartrate clusters is 5090.37 .
+
+\begin{table}[h]
+  \caption{Heartrate clusters Metrics}
+  \label{hr_metrics}
+  \centering
+  \begin{tabular}{ |l|c|c|}
+    \toprule
+    \cmidrule(r){1-2}
+    Cluster name & Cluster Size & Average Silhouette width \\
+    \midrule
+    S & 1246 & 0.28 \\
+    SM & 1640 & 0.2 \\
+    M1 & 2308 & 0.21 \\
+    M2 & 2584 & 0.26 \\
+    L & 1982 & 0.33 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
 \end{document}
