@@ -144,6 +144,13 @@ The results of the four techniques used for clustering are show in table x. K-me
 % table 2
 % table 3
 % figure 4
+Figure ~\ref{fig:act_res}  shows the four ACT clusters overlaid with a single participant (black), showing that the participant’s cluster membership changes over time. Clustering results are visualised in 2-dimensions using PCA (left) and UMAP (right). The time points are before ACT feedback (number of registered breaths) is introduced (top), after ACT feedback is introduced (middle), and once computer gaming is introduced to ACT routine (bottom). Each point represents one treatment of one participant. 
+\begin{figure}[!htb]
+  \centering
+  \caption{ACT clusters}
+  \includegraphics[]{fig_ACT_clust}
+  \label{fig:act_res}
+\end{figure}
 
 \subsubsection{ACT clustering validation}
 
@@ -197,11 +204,7 @@ Project Fizzyo is an ongoing study, with participation lasting 18 months. 7 mont
 \section{Usage of tables and figures}
 \subsection{Figures}
 
-\begin{figure}
-  \centering
-  \caption{Sample figure caption.}
-  \includegraphics[]{sample_fig}
-\end{figure}
+
 
 \subsection{Tables}
 \begin{table}
@@ -261,31 +264,31 @@ Here is how you can reference a table \ref{sample_table}
      Mean Breath Amplitude & Average breath amplitude (in mm H2O) during an ACT treatment. \\
      Minimum Breath Amplitude & Similarly minimum, maximum and standard deviation of breath amplitude. \\
      Maximum Breath Amplitude & ~ \\
-     Standard Deviation of Breath Amplitude & ~\\
+     Standard Deviation of Breath Amplitude & ~ \\
      \midrule
-     Mean Breath Duration & Average duration (in seconds) of breath during an ACT treatment.\\ 
+     Mean Breath Duration & Average duration (in seconds) of breath during an ACT treatment. \\ 
      Minimum Breath Duration &  Similarly minimum, maximum and standard deviation of \\ 
      Maximum Break Duration & breath duration in a treatment. \\
-     Standard Deviation of Breath Duration & ~\\
+     Standard Deviation of Breath Duration & ~ \\
      \midrule
      Break Count & Number of breaks (between breaths) in a treatment. \\
      \midrule
-     Mean Break Duration & Average duration (in seconds) of breaks between breaths.\\ 
+     Mean Break Duration & Average duration (in seconds) of breaks between breaths. \\ 
      Minimum Break Duration & Similarly minimum, maximum and standard deviation of \\ 
      Maximum Break Duration & breaks duration in a treatment. \\
-     Standard Deviation of Break Duration & ~\\
+     Standard Deviation of Break Duration & ~ \\
      \midrule
      Set Count & Number of sets in a treatment. Prescribed treatment may have up to 10 \\
-     ~ & sets. Set is a group of breaths separated by huffing and coughing activity.\\
+     ~ & sets. Set is a group of breaths separated by huffing and coughing activity. \\
      \midrule
      Pressure Readings Count & Number of pressure reading registered by ACT device during a treatment. \\
-     ~ & Used to filter out "test" device sessions that are not part of a treatment.\\
+     ~ & Used to filter out "test" device sessions that are not part of a treatment. \\
      \midrule
      Pressures Readings Completeness Score & Data completeness score for the day \\
      ~ & If a treatment has less than 150 pressure readings it's completeness \\
      ~ & score is 0. \\
      \midrule
-     Treatment Duration & Treatment duration (in minutes).\\
+     Treatment Duration & Treatment duration (in minutes). \\
      \midrule
      Treatment Daily Adherence Score & Number of completed treatments out of the prescribed ones (for the \\
      ~ & given day). \\
@@ -296,8 +299,8 @@ Here is how you can reference a table \ref{sample_table}
      Treatment Rolling Weekly Adherence Score & Number of completed treatments during the last 7 days (for a given date) \\
      ~ & out of the prescribed number of treatments for this period. \\
      \midrule
-     Breath Count Rolling Weekly Adherence Score & Number of registered breaths across all treatments during the last 7 days\\
-     ~ & (for a given date) out of the prescribed amount of breaths for this period.\ 
+     Breath Count Rolling Weekly Adherence Score & Number of registered breaths across all treatments during the last 7 days \\
+     ~ & (for a given date) out of the prescribed amount of breaths for this period. \\ 
      \midrule
      Treatment Weekly Adherence Score & Number of completed treatments during the last calendar week (for a given date) \\
      ~ & out of the prescribed number of treatments for this period. \\
@@ -306,7 +309,7 @@ Here is how you can reference a table \ref{sample_table}
      ~ & (for a given date) out of the prescribed amount of breaths for this period.\\
      \midrule
      Cumulative Adherence Score & Cumulative adherence score to date. \\
-     ~ & How many in total treatments patient done over a period (since the beginning of the study out the prescribed amount.\\
+     ~ & How many in total treatments patient done over a period (since the beginning of the study out the prescribed amount. \\
      \midrule
      Breathing Time Percentage & Time in a treatment spent on an exhalation, vs not.\\
      \midrule
