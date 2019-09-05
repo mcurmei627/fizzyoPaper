@@ -202,7 +202,7 @@ The ACT sub-types should be sensitive enough to capture changes in ACT, particul
   \label{fig:act_res}
 \end{figure}
 
-We also assessed the clustering stability on different data partitions. Random sampling 80~\% of the data and clustering using k-means provided very similar results with clustering on the full dataset: figure \ref{fig:ACTclusteringon80} shows that the shape of the clusters, cluster centroids as well as Silhouette Coefficients and Calinski-Harabaz Index (2200 v 1770 respectively) were comparable. 
+We assessed the clustering stability on different data partitions. Random sampling 80~\% of the data and clustering using k-means provided very similar results with clustering on the full dataset: figure \ref{fig:ACTclusteringon80} shows that the shape of the clusters, cluster centroids as well as Silhouette Coefficients and Calinski-Harabaz Index (2200 v 1770 respectively) were comparable. 
 
 \begin{figure}[!htb]
   \centering
@@ -210,17 +210,7 @@ We also assessed the clustering stability on different data partitions. Random s
   \includegraphics[]{ACTclusteringOn80.png}
   \label{fig:ACTclusteringon80}
 \end{figure}
-
-*Not sure about this part. Maybe move to appendix?
-We also assessed the validity of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters. Figure \ref{fig:ACTclusteringAB} shows the same patient trajectory for clustering with feature selection A and clustering with feature selection B, which includes two additional features: breath amplitude standard deviation, and rolling weekly adherence score for breath count. It is notable that once computer gaming was introduced to ACT in both cases A and B the same patient moved from cluster with “expected” breath counts per ACT to a cluster characterized by much higher breath counts. This validates that there was a change over time in the patient’s ACT pattern that could be captured. The additional sdBreathAmplitude feature make results more explainable from a clinical point of view, as the original cluster for the patient in Clustering B was characterized by a centroid with the highest sdBreathAmplitude value. 
-
-\begin{figure}[!htb]
-  \centering
-  \caption{Patient Trajectory on set A of features (without breath amplitude) and set B of features.}
-  \includegraphics[]{ACTclusteringAB.png}
-  \label{fig:ACTclusteringAB}
-\end{figure}
-
+We also assessed the validity of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters (see Appendix).
 \subsection{Clustering physical activity waveforms} 
 
 The purpose of clustering into sub-types is to summarise each participant's physical activity data. Clustering of physical activity data was used to extract daily patterns from the steps and heart rate waveforms and characterise the physical activity levels and patterns of individual patients using a dataset containing 9760 individual days. The different clusters should extract more complex characteristics than the ones which could be obtained by simply combining some of the extracted features.
@@ -579,7 +569,7 @@ The table below shows comparison of Average Silhouette width and Calinski-Haraba
   \begin{tabular}{ c|c|c}
     \toprule
     \cmidrule(r){1-2}
-    Number of Clusters & Average Silhouette width & Calinski-Harabasz index \\
+    Number of Clusters & Calinski-Harabasz index & Average Silhouette width \\
     \midrule
     3 & 2292 & 0.17 \\
     4 & 2208 & 0.18 \\
@@ -621,5 +611,51 @@ Clustering with number clusters k=4 has combination of good performance (Average
     \end{tabular}
 \end{table}
 
+\subsection{Hierarchical Clustering}
+Figure \ref{fig:figACTdent} shows the Dendrogram of ACT data demonstrating major splits for number of clusterts k = 2,3,5 and 6
+
+\begin{figure}[htb]
+  \centering
+  \caption{ Hierarchical Clustering Dendrogram for ACT data}
+  \includegraphics[scale=0.5]{fig_ACT_HC_dentogram.png}
+  \label{fig:figACTdent}
+\end{figure}
+
+\subsubsection{Hierarchical Clustering Metrics and Number of Clusters}
+The table \ref{tab:act_hc_clusters} shows comparison of Average Silhouette width and Calinski-Harabasz index different number of clusters.
+
+\begin{table}[htb]
+  \caption{Clusters Metrics for Hierahical Clustering vs Number of Clusters}
+  \label{tab:act_hc_clusters}
+  \centering
+  \begin{tabular}{ c|c|c}
+    \toprule
+    \cmidrule(r){1-2}
+    Number of Clusters & Calinski-Harabasz index & Average Silhouette width \\
+    \midrule
+    3 & 1793 &  0.13\\
+    4 & 1643 &  0.13\\
+    5 & 1414 &  0.08\\
+    6 & 1289 &  0.06 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+  \centering
+  \caption{ACT clusters displayed on PCA and UMAP projections obtained using Hierarchical clustering}
+  \includegraphics[scale=0.5]{fig_ACT_HC_4_Clusters.png}
+  \label{fig:figHC4clusters}
+\end{figure}
+
+\section{Appendix : ACT Cluster validations via patient trajectories}
+We assessed the validity of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters. Figure \ref{fig:ACTclusteringAB} shows the same patient trajectory for clustering with feature selection A and clustering with feature selection B, which includes two additional features: breath amplitude standard deviation, and rolling weekly adherence score for breath count. It is notable that once computer gaming was introduced to ACT in both cases A and B the same patient moved from cluster with “expected” breath counts per ACT to a cluster characterized by much higher breath counts. This validates that there was a change over time in the patient’s ACT pattern that could be captured. The additional breath amplitude standard deviation feature (sdBreathAmplitude) make results more explainable from a clinical point of view, as the original cluster for the patient in Clustering B was characterized by a centroid with the highest sdBreathAmplitude value. 
+
+\begin{figure}[htb]
+  \centering
+  \caption{Patient Trajectory on set A of features (without breath amplitude) and set B of features.}
+  \includegraphics[]{ACTclusteringAB.png}
+  \label{fig:ACTclusteringAB}
+\end{figure}
 
 \end{document}
