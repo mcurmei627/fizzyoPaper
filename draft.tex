@@ -244,13 +244,13 @@ The following features were used for clustering steps: number of minutes with st
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Interpretation \\
-    \hline
+    \midrule
     XS & Waveforms with very little steps activity or high amount of missing data \\
-    \hline
+    \midrule
     S & Moderate step activity, consistent cadence with few periods of high activity\\
-    \hline
+    \midrule
     M & Consistent moderate to high step rate with a period of sustained high step activity \\
-    \hline
+    \midrule
     L & High step rate with longer periods of sustained high step activity \\
     \bottomrule
     \end{tabular}
@@ -277,15 +277,15 @@ The five clusters found by K-means (as shown in figure \ref{fig:HRclusters} have
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Interpretation \\
-    \hline
+    \midrule
     S & Small heart rate values and heart rate consistently below 120 \\
-    \hline
+    \midrule
     SM & Consistent variations around 100 with very few spikes in heart rate values \\
-    \hline
+    \midrule
     M1 &  Waveform with high variability and periods with spikes above 120 \\
-    \hline
+    \midrule
     M2 & Consistent variations around 100 with spikes in values above 120 \\
-    \hline
+    \midrule
     L &  Large values around and above 120 \\
     \bottomrule
     \end{tabular}
@@ -307,29 +307,6 @@ The steps and heart rate clusters were validated with clinical experts. The clus
 
 Project [Anonymised] involves collecting novel data about how CF physiotherapy advice on ACTs and physical activity is adhered to in everyday life, information which has never been available to physiotherapists. In close collaboration with CF experts, we developed methods to interrogate and make sense of this data. Project [Anonymised] is an ongoing study, with participation lasting 18 months. 8 months into the trial we do not draw any conclusions, as we do not have an equal number of days of data from patients recruited over 8 months. Instead, we present a framework for analysis, which will empower clinicians to understand how physiotherapy advice is actually adhered to, interpret the impact of interventions such as gamification when the trial is complete., and eventually understand what type of physiotherapy leads to better clinical outcomes. Our framework involves processing the ACT and Fitbit data, deriving clinically meaningful features from it which characterise this novel data, and then using unsupervised clustering to find sub-types of this data. The clusters provide a useful way of tracking participants' trajectories across sub-types over time. 
 
-\section{Usage of tables and figures}
-\subsection{Figures}
-
-
-
-\subsection{Tables}
-\begin{table}
-  \caption{Sample table title}
-  \label{sample_table}
-  \centering
-  \begin{tabular}{lll}
-    \toprule
-    \cmidrule(r){1-2}
-    Col1 & Col2 & Col3 \\
-    \hline
-    a & 0 & z\\
-    b & 1 & y \\
-    c & 2 & x \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Here is how you can reference a table \ref{sample_table}
 
 \bibliographystyle{abbrv}
 % include your .bib file
@@ -340,72 +317,52 @@ Here is how you can reference a table \ref{sample_table}
 \section{Appendix : Table of physical activity data features}
 
 
-\begin{longtable}{  n|d }
+\begin{longtable}{  n | d }
 \toprule
 \cmidrule(r){1-2}
-\textbf{Feature Name} & \textbf{Feature description} \\
-\hline
+\textbf{Fitbit features} & \textbf{Feature description} \\
+\midrule
 \endfirsthead
 Minutes wear & Number of minutes in a day with heartrate value present \\
-\hline
-Percentage of wear & $\frac{\text{Minutes wear}}{24\cdot60}\cdot100\%$\\
-\hline
+\midrule
+Percentage of wear & $\frac{\textit{Minutes wear}}{24\cdot60}\cdot100\%$\\
+\midrule
 Wear during sleep & Indicator value: 1,  worn during sleep or 0, otherwise \\
-\hline
+\midrule
 Active hours & Number of hours with a step count > 500  \\
-\hline
+\midrule
 Low active hours & Number of hours with a step count < 500  \\
-\hline
+\midrule
 Mean hourly steps & Average of hourly step count \\
-\hline
+\midrule
 Step count & Total step count per day \\
-\hline
-Normalised step count & Rate of steps per minute when fitbit is worn \\
- & $\frac{Step Count}{Minutes Worn}$ \\
-\hline
- & Number of minutes with step count > 100 with the following constraint: \\
-Active Minutes Step 0 & - No minimum of consecutive minutes\\
-Active Minutes Step 2 & - At least 2 consecutive minutes > 100 \\
-Active Minutes Step 5 & - At least 5 consecutive minutes > 100 \\
-Active Minutes Step 10 & - At least 10 consecutive minutes > 100 \\
-Active Minutes Step 20 & - At least 20 consecutive minutes > 100 \\
-\hline
-Active minutes Step for the active period & Number of active minutes with step > 100 from 6am to midnight \\
-\hline
-Coefficient of Variation Step & Coefficient of variation for steps (removing zero values) at day level \\
- & $CoV = \frac{Standard Deviation}{Mean} * 100$ \\
- \hline
- Normalised step count for periods of : & \\
- - moderate activity & Rate of steps per minute when the heartrate is between 120 and 140. \\ 
- - vigorous activity & Rate of steps per minute when the heartrate is above 140. \\
- - moderate and vigorous activity & Rate of steps per minute when the heartrate is above 120. \\
- - non-moderate and non-vigorous activity & Rate of steps per minute when the heartrate is below 120.\\
- \hline
- Proxy for Resting Heartrate & Mean of the lowest 5 heartrate minutes averages \\
- \hline
- & Number of minutes with heartrate > 120 with the following constraint: \\
-Active Minutes Heartrate 0 & - No minimum of consecutive minutes\\
-Active Minutes Heartrate 2 & - At least 2 consecutive minutes > 120 \\
-Active Minutes Heartrate 5 & - At least 5 consecutive minutes > 120 \\
-Active Minutes Heartrate 10 & - At least 10 consecutive minutes > 120 \\
-Active Minutes Heartrate 20 & - At least 20 consecutive minutes > 120 \\
-\hline
-Active minutes Heartrate for the active period & Number of active minutes with heartrate > 100 from 6am to midnight \\
-\hline
-Coefficient of Variation Heartrate & Coefficient of variation for heartrate (removing zero values) at day level \\
- & $CoV = \frac{Standard Deviation}{Mean} * 100$ \\
- \hline
- Number of threshold switches above 100 & Number of times the heartrate goes above 100 from below this threshold at day level. \\ 
- Number of threshold switches above 120 & Number of times the heartrate goes above 120 from below this threshold at day level. \\ 
- Number of threshold switches above 140 & Number of times the heartrate goes above 140 from below this threshold at day level. \\ 
- \hline
- & Number of minutes with step count > 100 and heartrate > 120 with the following constraint: \\
-Active Minutes Step and Heartrate 0 & - No minimum of consecutive minutes\\
-Active Minutes Step and Heartrate 2 & - At least 2 consecutive minutes \\
-Active Minutes Step and Heartrate 5 & - At least 5 consecutive minutes \\
-Active Minutes Step and Heartrate 10 & - At least 10 consecutive minutes \\
-Active Minutes Step and Heartrate 20 & - At least 20 consecutive minutes \\
-\hline
+\midrule
+Normalised step count & Rate of steps per minute when fitbit is worn $\frac{\textit{Step Count}}{\textit{Minutes Worn}}$ \\
+\midrule
+ Step active minutes $k$, for $k\in \{0,2,5,10,20\}$ & Number of active minutes in a day. A minute is considered active if it has a step count > 100 and is part of a sequence of at least $k$ consecutive minutes with step count > 100. Note that for $k=0$ there is no restriction on the number of consecutive minutes\\
+\midrule
+Step active minutes during waking period & Number of minutes with step > 100 from 6am to midnight \\
+\midrule
+Step coefficient of variation & Coefficient of variation of minute step counts $CoV = \frac{\sigma (\textit{Step count})}{\mu (\textit{Step count})} \cdot 100$ \\
+ \midrule
+ Normalised step count for periods of : &  Rate of steps per minute when the heartrate is: \\
+ - moderate activity & - between 120 and 140. \\ 
+ - vigorous activity & - above 140. \\
+ - moderate and vigorous activity & - above 120. \\
+ - non-moderate and non-vigorous activity & - below 120.\\
+ \midrule
+ Resting heartrate proxy & Mean of the 5 minutes with the lowest heartrate average \\
+ \midrule
+Heartrate active minutes $k$, for $k\in \{0,2,5,10,20\}$ & Number of active minutes in a day. A minute is considered active if it has heartrate > 120 and is part of a sequence of at least $k$ consecutive minutes with heartrate > 120.\\
+\midrule
+Heartrate active minute during waking period & Number of minutes with heartrate > 120 from 6am to midnight \\
+\midrule
+Heartrate coefficient of variation & Coefficient of variation for heartrate minute averages $CoV = \frac{\sigma (\textit{Heartrate})}{\mu (\textit{Heartrate})} \cdot 100$ \\
+ \midrule
+ Number of switches above threshold $t$, for $t\in \{100,120,140\}$ & Number of times the heartrate goes above the threshold $t$ from below this threshold.\\ 
+ \midrule
+ Step and heartrate active minutes $k$, for $k\in \{0,2,5,10,20\}$ & Number of active minutes in a day. A minute is considered active if it has a step count > 100 and heartrate > 120 and is part of a sequence of at least $k$ consecutive minutes which satisfy both conditions.
+\midrule
 Heartrate Hourly max, min and median & Maximum. minimum and median of average hourly heartrate. \\
 \bottomrule
 \end{longtable}
@@ -416,62 +373,62 @@ Heartrate Hourly max, min and median & Maximum. minimum and median of average ho
 \toprule
 \cmidrule(r){1-2}
 \textbf{Feature Name} & \textbf{Feature description} \\
-\hline
+\midrule
 Breath Count & Number of breaths the person has made though an ACT  \\ 
  ~ & device during a treatment. A breath is counted if its maximum amplitude is \\ ~ & above the threshold of 8 mm H2O.\\
- \hline
+ \midrule
  Mean Breath Amplitude & Average breath amplitude (in mm H2O) during an ACT treatment. \\
  Minimum Breath Amplitude & Similarly minimum, maximum and standard deviation of breath amplitude. \\
  Maximum Breath Amplitude & ~ \\
  Standard Deviation of Breath Amplitude & ~ \\
- \hline
+ \midrule
  Mean Breath Duration & Average duration (in seconds) of breath during an ACT treatment. \\ 
  Minimum Breath Duration &  Similarly minimum, maximum and standard deviation of \\ 
  Maximum Break Duration & breath duration in a treatment. \\
  Standard Deviation of Breath Duration & ~ \\
- \hline
+ \midrule
  Break Count & Number of breaks (between breaths) in a treatment. \\
- \hline
+ \midrule
  Mean Break Duration & Average duration (in seconds) of breaks between breaths. \\ 
  Minimum Break Duration & Similarly minimum, maximum and standard deviation of \\ 
  Maximum Break Duration & breaks duration in a treatment. \\
  Standard Deviation of Break Duration & ~ \\
- \hline
+ \midrule
  Set Count & Number of sets in a treatment. Prescribed treatment may have up to 10 \\
  ~ & sets. Set is a group of breaths separated by huffing and coughing activity. \\
- \hline
+ \midrule
  Pressure Readings Count & Number of pressure reading registered by ACT device during a treatment. \\
  ~ & Used to filter out "test" device sessions that are not part of a treatment. \\
- \hline
+ \midrule
  Pressures Readings Completeness Score & Data completeness score for the day \\
  ~ & If a treatment has less than 150 pressure readings it's completeness \\
  ~ & score is 0. \\
- \hline
+ \midrule
  Treatment Duration & Treatment duration (in minutes). \\
- \hline
+ \midrule
  Treatment Daily Adherence Score & Number of completed treatments out of the prescribed ones (for the \\
  ~ & given day). \\
- \hline
+ \midrule
  Breath Count Daily Adherence Score & Number of registered breaths across all treatments for the given day \\
  ~ & out of the prescribed amount of breaths. \\ 
- \hline
+ \midrule
  Treatment Rolling Weekly Adherence Score & Number of completed treatments during the last 7 days (for a given date) \\
  ~ & out of the prescribed number of treatments for this period. \\
- \hline
+ \midrule
  Breath Count Rolling Weekly Adherence Score & Number of registered breaths across all treatments during the last 7 days \\
  ~ & (for a given date) out of the prescribed amount of breaths for this period. \\ 
- \hline
+ \midrule
  Treatment Weekly Adherence Score & Number of completed treatments during the last calendar week (for a given date) \\
  ~ & out of the prescribed number of treatments for this period. \\
- \hline
+ \midrule
  Breath Count Weekly Adherence Score & Number of registered breaths across all treatments during the last calendar week \\
  ~ & (for a given date) out of the prescribed amount of breaths for this period.\\
- \hline
+ \midrule
  Cumulative Adherence Score & Cumulative adherence score to date. \\
  ~ & How many in total treatments patient done over a period (since the beginning of the study out the prescribed amount. \\
- \hline
+ \midrule
  Breathing Time Percentage & Time in a treatment spent on an exhalation, vs not.\\
- \hline
+ \midrule
  Skipped Days Count & Skipped days since the last treatment. \\
  \bottomrule
 \end{longtable}
@@ -505,7 +462,7 @@ Calinski-harabasz index for the steps clusters is 6021.14 .
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Size & Average Silhouette width \\
-    \hline
+    \midrule
     XS & 1099 & 0.95 \\
     S & 3942 & 0.34 \\
     M & 2737 & 0.27 \\
@@ -535,7 +492,7 @@ Calinski-harabasz index for the steps clusters is 1518.1865 .
     \toprule
     \cmidrule(r){1-2}
     Cluster number & Cluster Size & Average Silhouette width \\
-    \hline
+    \midrule
     1 & 4996 & 0.12 \\
     2 & 4056 & 0.11 \\
     3 & 677 & 0.18 \\
@@ -568,7 +525,7 @@ Calinski-harabasz index for the heartrate clusters is 5090.37 .
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Size & Average Silhouette width \\
-    \hline
+    \midrule
     S & 1246 & 0.28 \\
     SM & 1640 & 0.2 \\
     M1 & 2308 & 0.21 \\
@@ -589,7 +546,7 @@ The clustering results using Hierarchical clustering with complete linkage for t
   \label{fig:hrClustersHC}
 \end{figure}
 
-Calinski-harabasz index for the heartrate clusters is 135.51 .
+Calinski-Harabasz index for the heartrate clusters is 135.51 .
 
 \begin{table}[H]
   \caption{Heartrate clusters Metrics HC}
@@ -599,7 +556,7 @@ Calinski-harabasz index for the heartrate clusters is 135.51 .
     \toprule
     \cmidrule(r){1-2}
     Cluster number & Cluster Size & Average Silhouette width \\
-    \hline
+    \midrule
     1 & 4221 & -0.07 \\
     2 & 4901 & -0.06 \\
     3 & 607 & -0.10 \\
@@ -608,5 +565,61 @@ Calinski-harabasz index for the heartrate clusters is 135.51 .
     \bottomrule
     \end{tabular}
 \end{table}
+\section{Appendix : Cluster results and metrics for ACT treatments}
+
+The tables below show the metrics for the ACT treatment clusters.
+\subsection{K-Means Clustering}
+\subsubsection{K-Means Metrics and Number of Clusters}
+The table below shows comparison of Average Silhouette width and Calinski-Harabasz index different number of clusters
+
+\begin{table}[H]
+  \caption{Clusters Metrics Kmeans vs Number of Clusters}
+  \label{steps_metrics}
+  \centering
+  \begin{tabular}{ c|c|c}
+    \toprule
+    \cmidrule(r){1-2}
+    Number of Clusters & Average Silhouette width & Calinski-Harabasz index \\
+    \midrule
+    3 & 2292 & 0.17 \\
+    4 & 2208 & 0.18 \\
+    5 & 1996 & 0.15 \\
+    6 & 1830 & 0.15 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Cluster interpretation}
+Clustering with number clusters k=4 has combination of good performance (Average Silhouette width and Calinski-Harabasz index) and positive feedback from clinical team on cluster level granularity and clusters interpretability. 
+
+\begin{figure}
+  \centering
+  \caption{ACT clusters displayed on PCA and UMAP projections obtained using Kmeans clustering}
+  \includegraphics[scale=0.5]{fig_ACT_4_clusters.png}
+  \label{fig:figACT4clusters}
+\end{figure}
+
+\begin{table}[htb]
+  \caption{ACT Clusters interpretation}
+  \label{tab:act_interpret}
+  \centering
+  \begin{tabular}{ c|l}
+    \toprule
+    
+  \textbf{Feature Name} & \textbf{Feature description} \\
+  \midrule
+    1 & Treatments with exceptionally big breath counts and biggest treatment adherence \\
+  \midrule
+    2 & Breath counts weekly adherence is on a lower side, treatments are short \\
+  \midrule
+    3 & Good breath counts and related breath weekly adherence, the breaths themselves have big standard  \\ 
+    ~ &  deviation of duration \\
+  \midrule
+    4 & Very good breath counts and related breath weekly adherence,  breaths are mostly short and powerful \\ 
+    ~ & (with biggest standard deviation for amplitude), shorter treatments  \\
+  \bottomrule
+    \end{tabular}
+\end{table}
+
 
 \end{document}
