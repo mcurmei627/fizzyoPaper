@@ -79,14 +79,14 @@
 \maketitle
 
 \begin{abstract}
-  Children and young people with cystic fibrosis (CYPwCF) are prescribed physiotherapy including daily airway clearance techniques (ACT), and being physically active as part of their treatment. Little is known about how CYPwCF follow this advice in their everyday lives. Physiotherapy has evolved over the decades without the clarity of evidence that would accrue from detailed data. Such data are now being collected as part of Project [Anonymous] which is the largest CF physiotherapy trial in the UK to date. The data come firstly from novel pressure sensors attached to existing ACT devices which measure breathing patterns during normal treatments, and secondly from Fitbit activity trackers which monitor physical activity patterns. In close collaboration with clinical experts, we quantified and characterised this unique ACT and activity data by creating custom features from the waveforms. Using unsupervised learning techniques, We identified meaningful sub-types, with k-means clustering achieving the best performance. We found 4 clusters of ACT data which were sensitive enough to track interventions in ACT routines. Within physical activity data we identified 4 clusters related to daily footsteps  and 5 clusters related to heart rate data.
+  Children and young people with cystic fibrosis (CYPwCF) are prescribed physiotherapy including daily airway clearance techniques (ACT), and being physically active as part of their treatment. Little is known about how CYPwCF follow this advice in their everyday lives. Physiotherapy has evolved over the decades without the clarity of evidence that would accrue from detailed data. Such data are now being collected as part of Project [Anonymous] which is the largest CF physiotherapy trial in the UK to date. The data come firstly from novel pressure sensors attached to existing ACT devices which measure breathing patterns during normal treatments, and secondly from Fitbit activity trackers which monitor physical activity patterns. In close collaboration with clinical experts, we quantified and characterised this unique ACT and activity data by creating custom features from the waveforms. Using unsupervised learning techniques, We identified meaningful sub-types, with k-means clustering achieving the best performance. We found 4 clusters of ACT data which were sensitive enough to track interventions in ACT routines. Within physical activity data we identified 4 clusters related to daily footsteps and 5 clusters related to heart rate data.
 \end{abstract}
 
 \section{Problem overview}
 
-Cystic Fibrosis (CF) is the most common life-limiting inherited disorder in the UK, affecting approximately 1 in 2500 babies born. It is a systemic genetic disorder that mainly affects the respiratory and digestive systems. In the lungs excessive thick sticky mucus can cause cycles of infection, inflammation and lung damage leading to a deterioration in health. Despite improvements in care, CF remains progressive and incurable. In some cases, lung-transplantation can prolong life, but only half of the current CF population are expected to live to over 40 years old \cite{Keogh2018}.  
+Cystic Fibrosis (CF) is the most common life-limiting inherited disorder in the UK, affecting approximately 1 in 2500 babies born. It is a systemic genetic disorder that mainly affects the respiratory system. In the lungs excessive thick sticky mucus can cause cycles of infection, inflammation and lung damage leading to a deterioration in health. Despite improvements in care, CF remains progressive and incurable. In some cases, lung-transplantation can prolong life, but only half of the current CF population are expected to live to over 40 years old \cite{Keogh2018}.  
 
-To promote clearance of mucus from the lungs, daily physiotherapy is prescribed \cite{Daniels2017}. Airway clearance techniques (ACT) may include a series of  exhalations against resistance into hand-held ACT devices, followed by forced expiration techniques ('huffing') and coughing to improve mucociliary clearance and expel mucous; an exercise which is performed repeatedly \cite{Villanuevaj4574}. ACT is burdensome, with some CYPwCF reporting that ACT is the most burdensome part of having the disease \cite{JamesLindAlliance}. Physiotherapists also encourage children to have a physically active lifestyle, which has been shown to reduce the rate of decline in lung function \cite{Williams2014}. Adherence to physiotherapy has traditionally been assessed via questionnaire or self report, both of which are known to be inaccurate. More objective measures of adherence  have not been widely available, and the evolution of CF physiotherapy has not been informed by this important evidence \cite{Modi2006}.  
+To promote clearance of mucus from the lungs, daily physiotherapy called airway clearance techniques (ACT) is prescribed \cite{Daniels2017}. Some CYPwCF reporting that ACT is the most burdensome part of having the disease \cite{JamesLindAlliance}. Physiotherapists also encourage children to have a physically active lifestyle, which has been shown to reduce the rate of decline in lung function \cite{Williams2014}. Adherence to physiotherapy has traditionally been assessed via questionnaire or self report, both of which are known to be inaccurate. More objective measures of adherence  have not been widely available, and the evolution of CF physiotherapy has not been informed by this important evidence \cite{Modi2006}.  
 
 Bespoke pressure sensors were developed to attach to existing ACT devices in order to facilitate remote monitoring of ACT undertaken routinely at home. In addition, bespoke games were developed which could be driven by pressure changes from breathing through the sensor. This was in order to investigate if gamification might reduce the treatment burden of ACT or modify ACT adherence or patterns \cite{Jackson2019} \cite{[Anonymised]2019} . Physical activity patterns were also measured using Fitbit activity trackers, which generated granular detail on footsteps and heart rate changes during the day. 
 
@@ -96,11 +96,9 @@ Bespoke pressure sensors were developed to attach to existing ACT devices in ord
 
 \subsection{Trial design and analysis approach}
 
-The 18 month trial used an interrupted time series design, so that the effect of introducing and removing interventions such as gamification could be assessed [[*******UCL****** ref to details of trial design,is this sufficient? NREC:18-LO-1038 ]. Interventions included: introducing feedback to participants on their ACTs (number of breaths per treatment) via a computer tablet application, introducing games, and later removing these interventions. The data presented here is from the first 8x months of the trial. Participants were: [*******UCL****** exact numbers] 65x males and 80x females ranging in age from 6-16 years old, from 3 London hospitals, all of whom consented to participate in the study. All data were completely de-identified for analysis. 
+The 18 month trial used an interrupted time series design, so that the effect of introducing and removing interventions such as gamification could be assessed [NREC:18-LO-1038]. Interventions included: introducing feedback to participants on their ACTs (number of breaths per treatment) via a computer tablet application, introducing games, and later removing these interventions. The data presented here is from the first 8x months of the trial. Participants were: 71 females and 74 males ranging in age from 6-16 years old, from 3 London hospitals, all of whom consented to participate in the study. All data were completely de-identified for analysis. 
  
-Our analysis seeks to find patterns in physiotherapy data. Once these patterns are known, they can be linked with clinical outcomes to determine if certain behaviour patterns are preferable. We do not impose pre-conceived labels such as “good” or “bad” on waveforms, thus we leave open the possibility that what is currently prescribed may not be optimal. As such, the data is unlabelled and we use unsupervised learning approach to achieve this. Unsupervised clustering is becoming an established technique for finding sub-types in physical activity data \cite{physical_activity_patterns_2017} and pressure data relating to respiratory disease []. 
-
-A high-scale data analysis and exploration pipeline was built in R in a secure analysis environment.  
+Our analysis seeks to find patterns in physiotherapy data. Once these patterns are known, they can be linked with clinical outcomes to determine if certain behaviour patterns are preferable. We do not impose pre-conceived labels such as “good” or “bad” on waveforms, thus we leave open the possibility that what is currently prescribed may not be optimal. As such, the data is unlabelled and we use unsupervised learning approach to achieve this. Unsupervised clustering has been shown to be a useful technique for analysis of healthcare data, including finding novel sub-types in physical activity data \cite{physical_activity_patterns_2017} and sub-types in a variety of diseases including arthtritis \cite{Eng2019} and sepsis \cite{Seymour2019}. A high-scale data analysis and exploration pipeline was built in R in a secure analysis environment.  
 
 \subsection{Collaboration, trust and interpretability}
 
@@ -110,7 +108,7 @@ Many applications of machine learning to medical data fail to explain how (if at
 
 \subsubsection{Breath data description}
 
-ACT treatments commonly involve around 10 sets of 10 exhalation breaths into an ACT device. Participants generally used 1 of 4 different ACT devices compatible with the pressure sensor; the Acapella, Aerobika, PariPEP or AstraPEP. Each device produced breaths with a slightly different overall shape, e.g. with small oscillations. Sometimes participants used different devices over different days. Each set helps to loosen mucus, and between sets, patients normally 'huff' and cough to expel it. The treatments are usually performed one or more times per day depending on how well the person is or how much mucus they normally produce; participants did not have identical prescriptions. For the study, the ACT device was fitted with a bespoke wireless pressure sensor sampling pressure at 10~Hz, recording pressure values in time-stamped millibars.  
+ACT treatments commonly involve around 10 sets of 10 exhalation breaths into an ACT device.  Each set helps to loosen mucus, and between sets, patients normally 'huff' and cough to expel it \cite{Villanuevaj4574}. The treatments are usually performed one or more times per day depending on how well the person is or how much mucus they normally produce; participants did not have identical prescriptions. For the study, the ACT device was fitted with a bespoke wireless pressure sensor sampling pressure at 10~Hz, recording pressure values in time-stamped millibars.  
 
 \subsubsection{Processing breath data}
 
@@ -127,14 +125,24 @@ In total, we recorded 5x,000 sensor readings. This included data from every time
 
 \subsubsection{Featurising breath data}
 
-A typical ACT waveform which has been pre-processed, is shown in figure \ref{fig:individual_breaths}. The defining characteristics of ACT treatments were summarised in a range of features (variables) including: breath count, breath duration, breath amplitude, and treatment duration. In order to derive these features, our breath identification algorithm recognises not only simple breaths, but complex breaths composed of multiple peaks, and having a variety of shapes & oscillations which are characteristic of the 3 different ACT devices used in the study. In addition to mean breath amplitude, we use amplitude standard deviation as a feature, in order to capture inconsistency or disorderliness in physiotherapy. We also identified how many discernible sets were apparent in the treatment. These features are on a per-treatment level. 
+A typical ACT waveform which has been pre-processed, is shown in figure \ref{fig:individual_breaths}. The defining characteristics of ACT treatments were summarised into 27 features (variables) including: breath count, breath duration, breath amplitude, and treatment duration. In order to derive these features, our breath identification algorithm recognises not only simple breaths, but complex breaths composed of multiple peaks, and having a variety of shapes & oscillations which are characteristic of the 4 different ACT devices used in the study. We use amplitude standard deviation as a feature, in order to capture inconsistency or disorderliness in physiotherapy. We also identified how many discernible sets were apparent in the treatment. These features are on a per-treatment level. 
 
-\begin{figure}[htb]
-  \includegraphics[width=\textwidth]{individual_breaths.png}
-  \centering
-   \caption{A typical, pre-processed ACT waveform. This treatment is 20 seconds long and contains 7 exhalation breaths.}
-  \label{fig:individual_breaths}
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{individual_breaths.png} % first figure itself
+        \caption{A typical, pre-processed ACT waveform. This treatment is 20 seconds long and contains 7 exhalation breaths.}
+        \label{fig:individual_breaths}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{HR.png} % second figure itself
+        \caption{One day showing heartrate data from the Fitbit with a sustained period of heartrate in MVPA.}
+         \label{fig:HR}
+    \end{minipage}
 \end{figure}
+
 
 The aforementioned features capture the characteristics of existing treatments. However it is common for prescribed treatments to be skipped, and days with no treatments is an important signal itself. Several features were derived which captured missing data: treatment adherence to date, skipped days since last treatment, rolling adherence over 7 days. These features are on a per-day level, as participants are prescribed 1 or 2 treatments per day. 
 
@@ -142,12 +150,6 @@ The aforementioned features capture the characteristics of existing treatments. 
 \subsubsection{Featurising physical activity data}
 The Fitbit activity tracker (Fitbit AltaHR) provided each participant’s step count per minute. While real-time heartbeat data would allow for a detailed analysis of heart rate waveforms, the Fitbit only provides average heart rate, with a variable sampling frequency ranging from 3 to 12 values per minute. To achieve consistent frequency and comparable values, the heart rate values were averaged for each minute. An example of heart rate data is shown in figure \ref{fig:HR}.
 
-\begin{figure}[htb]
-  \includegraphics[width=\textwidth]{HR.png}
-  \centering
-   \caption{One day showing heartrate data with a sustained period of heartrate in MVPA.}
-  \label{fig:HR}
-\end{figure}
 
 Mindful of these data limitations, we extracted high-level patterns from the minute-averaged waveforms at a day level. The heart rate and steps data sets were featurised using summary statistics per day using counts, frequency and interval values, such as number of minutes in moderate to vigorous intensity physical activities (MVPA) (heart rate above 120 bpm) per day, step cadence (number of steps/minutes of wear) per day, and number of hours with greater than 500 steps per day. 
 
@@ -155,9 +157,9 @@ To account for missing data during times that the Fitbit was not worn, the wear 
 
 \subsubsection{Clustering to find sub-types}  
 
-All features were verified by clinicians as being meaningful or potentially meaningful. We perform a correlation analysis on all features and removed features which were highly correlated. We use the Hopkins statistic [ref] to measure clustering tendency. Features with a Gaussian distribution were normalised to have mean~=~0 and standard deviation~=~1. In order to visualise the results, we used dimensionality reduction. We used the first two principle components from principal component analysis [ref], Uniform Manifold Approximation and Projection (UMAP) [ref], and t-Distributed Stochastic Neighbor Embedding (T-SNE [ref]. We identified outliers using xxx (Olga) methods and removed less than xxx2~\%, with these cases being recognised as device malfunctions or abnormal behaviour.  
+We performed a correlation analysis on all features and removed features which were highly correlated, or were not verified by clinicians as being meaningful or potentially meaningful. We use the Hopkins statistic [ref] to measure clustering tendency (“factoextra” R package implementation implies that Hopkins statistic value close to 0 indicate the data is highly clusterable). Features with a Gaussian distribution were normalised to have mean~=~0 and standard deviation~=~1. In order to visualise the results, we used dimensionality reduction. We used the first two principle components from principal component analysis (PCA) [ref], Uniform Manifold Approximation and Projection (UMAP) \cite{Mcinnes2018}, and t-Distributed Stochastic Neighbor Embedding (T-SNE) \cite{Maaten2008}. We identified outliers using Tukey method and removed less than xxx2~\%, with these cases being recognised as device malfunctions or abnormal behaviour.  
 
-We employed the following clustering methods: k-means, Density-based spatial clustering of applications with noise (DBSCAN) [ref?] and hierarchical clustering.  
+We employed the following clustering methods: k-means, Density-based spatial clustering of applications with noise and hierarchical clustering.  
 
 \section{Results}
 
@@ -166,23 +168,18 @@ We employed the following clustering methods: k-means, Density-based spatial clu
 \subsubsection{Feature selection for clustering}
 
 Some features were excluded from clustering, but provided interesting physiotherapy insights.  
-The number of sets in a treatment were expected to be influential in clustering, as a regular pattern of sets would show close adherence to physiotherapy advice. However we found that less than 20xx\% (Tempest) of treatments had discernible sets, so this feature could not be used. The features used for clustering are shown in table X below, while the full list of features is shown in appendix X. 
+The number of sets in a treatment were expected to be influential in clustering, as a regular pattern of sets would show close adherence to physiotherapy advice. However we found that less than 20xx\% (Tempest) of treatments had discernible sets, so this feature could not be used. The features used for clustering are shown in table X below, while the full list of features is shown in appendix X. The Hopkins statistic for the data with the chosen features was 0.2069, suggesting  that data is has good clustering tendency. 
 
-\subsubsection{Comparison of clustering techniques}
-We compared the three clustering techniques (see appendix) and found the best performance with k-means. 
-
+\subsubsection{ACT K-means clustering results}
+The purpose of clustering into sub-types is to summarise how a participant is performing their ACT. We compared the K-means and Hierahical clustering techniques (see appendix) and found the best performance with k-means.  We chose k=4 clusters to maximise both silhouette value (average 0.18), and the interpretability of the results. If k is too low, the sub-types are not granular enough, if k is too high it becomes challenging to remember the characteristics of each sub-type.The centroid values of the 4 clusters are shown in table X below.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{featureTables.png}
-  \caption{To be replaced with a proper table.}
+  \caption{To be replaced with a proper table. Feature values for the cluster centroids.}
 \end{figure}
 
-
-\subsubsection{ACT K-means clustering results}
-The purpose of clustering into sub-types is to summarise how a participant is performing their ACT. We chose k=4 clusters to maximise both silhouette value (average 0.18), and the interpretability of the results. If k is too low, the sub-types are not granular enough, if k is too high it becomes challenging to remember the characteristics of each sub-type. 
-
-The centroid values of the 4 clusters are shown in table X below. Based on these centroids, the four ACT sub-types, which we named alpha, beta, gamma and delta have the following interpretations: 
+ Based on these centroids, the four ACT sub-types, which we named alpha, beta, gamma and delta have the following interpretations: 
 
 \begin{itemize}
 \item Alpha - Low adherence  ....
@@ -190,6 +187,8 @@ The centroid values of the 4 clusters are shown in table X below. Based on these
 \item Gamma -  ....
 \item Delta -  ....
 \end{itemize}
+
+The clusters capture variability of ACT treatments patient do at home, for example we identified clusters that are characterized by big adherence or breath with higher amplitude (see Appendix).
 
 \subsubsection{ACT clustering validation}
 
@@ -202,68 +201,42 @@ The ACT sub-types should be sensitive enough to capture changes in ACT, particul
   \label{fig:act_res}
 \end{figure}
 
-We assessed the clustering stability on different data partitions. Random sampling 80~\% of the data and clustering using k-means provided very similar results with clustering on the full dataset: figure \ref{fig:ACTclusteringon80} shows that the shape of the clusters, cluster centroids as well as Silhouette Coefficients and Calinski-Harabaz Index (2200 v 1770 respectively) were comparable. 
+We assessed the clustering stability on different data partitions. Random sampling 80~\% of the data and clustering using k-means provided very similar results with clustering on the full dataset (see appendix), indicating stable clustering. We also assessed the validity of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters (see Appendix).
 
-\begin{figure}[!htb]
-  \centering
-  \caption{K-means clustering results on full dataset (left) and subset of data (right).}
-  \includegraphics[]{ACTclusteringOn80.png}
-  \label{fig:ACTclusteringon80}
-\end{figure}
-We also assessed the validity of the clusters by adding or removing features and checking individual patients’ representation and trajectory in those clusters (see Appendix).
 \subsection{Clustering physical activity waveforms} 
 
-The purpose of clustering into sub-types is to summarise each participant's physical activity data. Clustering of physical activity data was used to extract daily patterns from the steps and heart rate waveforms and characterise the physical activity levels and patterns of individual patients using a dataset containing 9760 individual days. The different clusters should extract more complex characteristics than the ones which could be obtained by simply combining some of the extracted features.
+The purpose of clustering into sub-types is to summarise each participant's physical activity data. Clustering of physical activity data was used to extract daily patterns from the steps and heart rate waveforms and characterise the physical activity levels and patterns of individual patients using a dataset containing 9760 individual days. 
 
-\subsubsection{Steps clusters}
-
-The following features were used for clustering steps: number of minutes with step count higher than 100 for at least 5 consecutive minutes, the mean of total step count per hour, the step cadence for the periods in MVPA and the number of hours in the day with 0~< ~steps~count~<~500. Features were selected as a result of feature selection, correlation and outlier analysis. Three sub-types were desired for the steps clusters covering small, medium and large amounts of steps activity throughout the day. Four clusters (as shown in figure \ref{fig:stepsClusters}) were chosen in this case to cover these three sub-types as well as a sub-type for the instances with missing data (XS cluster). 
-
-\begin{figure}[htb]
-  \centering
-  \caption{Steps clusters displayed on the first two principle components.}
-  \includegraphics[]{stepsClusters.png}
-  \label{fig:stepsClusters}
-\end{figure}
-
-\begin{table}[H]
-  \caption{Steps Clusters Interpretation}
-  \label{steps_inter}
-  \centering
-  \begin{tabular}{ c|l }
-    \toprule
-    \cmidrule(r){1-2}
-    Cluster name & Cluster Interpretation \\
-    \midrule
-    XS & Waveforms with very little steps activity or high amount of missing data \\
-    \midrule
-    S & Moderate step activity, consistent cadence with few periods of high activity\\
-    \midrule
-    M & Consistent moderate to high step rate with a period of sustained high step activity \\
-    \midrule
-    L & High step rate with longer periods of sustained high step activity \\
-    \bottomrule
-    \end{tabular}
-\end{table}
+The two clustering methods used were K-means and hierarchical clustering with complete linkage. k-means clustering was chosen due to better performance on both the average silhouette width and the Calinski-Harabasz index as well as the resulting groupings on the dimensionality reduction plots (see Appendix for results).  DBSCAN was also reviewed, but due to the nature of the data (continuous representation, flat structure) it was not used in the analysis. 
 
 \subsubsection{Heart rate clusters}
 
-The following were used as features for heart rate clustering: the number of minutes with heart rate higher than 120, coefficient of variation for heart rate values per day, number of time heart rate exceeds 100 and 120, and the median average hourly heart rate. Experiments were carried out with 3, 4 and 5 clusters and the choice of k was based on the cluster interpretability results. The sub-types found when k=5 were the best at identifying more complex patterns and grouping similar waveforms together. 
-The five clusters found by K-means (as shown in figure \ref{fig:HRclusters} have the following interpretation: 
+The following were used as features for heart rate clustering: the number of minutes with heart rate higher than 120, coefficient of variation for heart rate values per day, number of time heart rate exceeds 100 and 120, and the median average hourly heart rate. The Hopkins statistic for the data with the chosen features was: 0.062, suggesting a high clustering tendency. Experiments were carried out with 3, 4 and 5 clusters and the choice of k was based on the cluster interpretability results. The sub-types found when k=5 were the best at identifying more complex patterns and grouping similar waveforms together. 
+The five clusters found by K-means (as shown in figure \ref{fig:HRclusters}) have the following interpretation: 
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[]{HRclusters.png}
-  \caption{PCA of representation of the five heart rate clusters. }
-  \label{fig:HRclusters}
+
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{HRclusters.png} % first figure itself
+        \caption{PCA representation of the five heart rate clusters.}
+        \label{fig:HRclusters}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{FitbitClusterValidation.png} % second figure itself
+        \caption{Steps clusters displayed on the first two principle components. Crosses are days with daily cadence above 30 which are all part of the L cluster.}
+ \label{fig:FitbitClusterValidation}
+    \end{minipage}
 \end{figure}
 
 
 \begin{table}[H]
-  \caption{Heartrate Clusters Interpretation}
+  \caption{Heart rate Clusters Interpretation}
   \label{hr_inter}
   \centering
-  \begin{tabular}{ c|l }
+  \begin{tabular}{ c|d }
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Interpretation \\
@@ -281,17 +254,34 @@ The five clusters found by K-means (as shown in figure \ref{fig:HRclusters} have
     \end{tabular}
 \end{table}
 
+\subsubsection{Steps clusters}
+
+The following features were used for clustering steps: number of minutes with step count higher than 100 for at least 5 consecutive minutes, the mean of total step count per hour, the step cadence for the periods in MVPA and the number of hours in the day with 0~< ~steps~count~<~500. Features were selected as a result of feature selection, correlation and outlier analysis. The Hopkins statistic for the data with the chosen features was: 0.13375, suggesting a high clustering tendency. Three sub-types were desired for the steps clusters covering small, medium and large amounts of steps activity throughout the day. Four clusters (as shown in figure \ref{fig:stepsClusters}) were chosen in this case to cover these three sub-types as well as a sub-type for the instances with missing data (XS cluster). 
+
+
+\begin{table}[H]
+  \caption{Steps Clusters Interpretation}
+  \label{steps_inter}
+  \centering
+  \begin{tabular}{ c|d }
+    \toprule
+    \cmidrule(r){1-2}
+    Cluster name & Cluster Interpretation \\
+    \midrule
+    XS & Waveforms with very little steps activity or high amount of missing data \\
+    \midrule
+    S & Moderate step activity, consistent cadence with few periods of high activity\\
+    \midrule
+    M & Consistent moderate to high step rate with a period of sustained high step activity \\
+    \midrule
+    L & High step rate with longer periods of sustained high step activity \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsubsection{Fitbit cluster validation }
 
-The steps and heart rate clusters were validated with clinical experts. The clusters were found to be meaningful and useful ways to categorise the waveforms. Individual waveforms were manually inspected together with the cluster boundaries to ensure consistency across cluster interpretations and the actual cluster characteristics. Additionally, other features that were not included in the clustering analysis were used to validate the clusters and their interpretations. Certain expected conditions were checked against the cluster labels and plotted using the PCA graph such as figure \ref{fig:FitbitClusterValida} below. Cluster boundaries for both steps and heartrate clusters were also utilised to validate the cluster properties and interpretation, these can be found in the Appendix. 
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[]{FitbitClusterValidation.png}
-  \caption{: Crosses are days with daily cadence above 30 which are all part of the L cluster.}
-  \label{fig:FitbitClusterValidation}
-\end{figure}
-
+The steps and heart rate clusters were validated with clinical experts. The clusters were found to be meaningful and useful ways to categorise the waveforms. Individual waveforms were manually inspected together with the cluster boundaries to ensure consistency across cluster interpretations and the actual cluster characteristics. Additionally, other features that were not included in the clustering analysis were used to validate the clusters and their interpretations. Certain expected conditions were checked against the cluster labels and plotted using the PCA graph such as figure \ref{fig:FitbitClusterValida}, which shows that all days with a cadence above 30, do indeed fall into the L cluster. Cluster boundaries for both steps and heartrate clusters were also utilised to validate the cluster properties and interpretation, these can be found in the Appendix. 
 
 \section{Discussion and conclusion} 
 
@@ -351,9 +341,9 @@ Heartrate coefficient of variation & Coefficient of variation for heartrate minu
  \midrule
  Number of switches above threshold $t$, for $t\in \{100,120,140\}$ & Number of times the heartrate goes above the threshold $t$ from below this threshold.\\ 
  \midrule
- Step and heartrate active minutes $k$, for $k\in \{0,2,5,10,20\}$ & Number of active minutes in a day. A minute is considered active if it has a step count > 100 and heartrate > 120 and is part of a sequence of at least $k$ consecutive minutes which satisfy both conditions.
+ Step and heartrate active minutes $k$, for $k\in \{0,2,5,10,20\}$ & Number of active minutes in a day. A minute is considered active if it has a step count > 100 and heartrate > 120 and is part of a sequence of at least $k$ consecutive minutes which satisfy both conditions. \\
 \midrule
-Heartrate Hourly max, min and median & Maximum. minimum and median of average hourly heartrate. \\
+Hourly Max/Min/Median Heartrate & Maximum, minimum and median of average hourly heartrate. \\
 \bottomrule
 \end{longtable}
 
@@ -362,74 +352,51 @@ Heartrate Hourly max, min and median & Maximum. minimum and median of average ho
 \begin{longtable}{ n|d}
 \toprule
 \cmidrule(r){1-2}
-\textbf{Feature Name} & \textbf{Feature description} \\
+\textbf{ACT features} & \textbf{Feature description} \\
 \midrule
-Breath Count & Number of breaths the person has made though an ACT  \\ 
- ~ & device during a treatment. A breath is counted if its maximum amplitude is \\ ~ & above the threshold of 8 mm H2O.\\
+Breath count & Number of breaths the person has made though an ACT device during a treatment. A breath is counted if its maximum amplitude is above the threshold of 8 mm H2O.\\
  \midrule
- Mean Breath Amplitude & Average breath amplitude (in mm H2O) during an ACT treatment. \\
- Minimum Breath Amplitude & Similarly minimum, maximum and standard deviation of breath amplitude. \\
- Maximum Breath Amplitude & ~ \\
- Standard Deviation of Breath Amplitude & ~ \\
+ Mean/Min/Max/Standard Deviation of breath amplitude & Statistics of breath amplitude (in mm H2O) during an ACT treatment. \\
+  \midrule
+ Mean/Min/Max/Standard Deviation of breath duration & Statistics of breath duration (in seconds) during an ACT treatment. \\
  \midrule
- Mean Breath Duration & Average duration (in seconds) of breath during an ACT treatment. \\ 
- Minimum Breath Duration &  Similarly minimum, maximum and standard deviation of \\ 
- Maximum Break Duration & breath duration in a treatment. \\
- Standard Deviation of Breath Duration & ~ \\
+ Break count & Number of breaks (between breaths) in a treatment. \\
  \midrule
- Break Count & Number of breaks (between breaths) in a treatment. \\
+ Mean/Min/Max/Standard Deviation of breath duration & Statistics of duration (in seconds) of breaks between breaths in an ACT treatment. \\
  \midrule
- Mean Break Duration & Average duration (in seconds) of breaks between breaths. \\ 
- Minimum Break Duration & Similarly minimum, maximum and standard deviation of \\ 
- Maximum Break Duration & breaks duration in a treatment. \\
- Standard Deviation of Break Duration & ~ \\
+ Set count & Number of sets in a treatment. Prescribed treatment may have up to 10 sets. Set is a group of breaths separated by huffing and coughing activity. \\
  \midrule
- Set Count & Number of sets in a treatment. Prescribed treatment may have up to 10 \\
- ~ & sets. Set is a group of breaths separated by huffing and coughing activity. \\
+ Pressure readings count & Number of pressure reading registered by ACT device during a treatment. Used to filter out "test" device sessions that are not part of a treatment. \\
  \midrule
- Pressure Readings Count & Number of pressure reading registered by ACT device during a treatment. \\
- ~ & Used to filter out "test" device sessions that are not part of a treatment. \\
+ Pressures readings completeness score & Data completeness score for the day If a treatment has less than 150 pressure readings it's completeness score is 0. \\
  \midrule
- Pressures Readings Completeness Score & Data completeness score for the day \\
- ~ & If a treatment has less than 150 pressure readings it's completeness \\
- ~ & score is 0. \\
+ Treatment duration & Treatment duration (in minutes). \\
  \midrule
- Treatment Duration & Treatment duration (in minutes). \\
+ Treatment daily adherence score & Number of completed treatments out of the prescribed ones (for the given day). \\
  \midrule
- Treatment Daily Adherence Score & Number of completed treatments out of the prescribed ones (for the \\
- ~ & given day). \\
+ Breath count daily adherence score & Number of registered breaths across all treatments for the given day out of the prescribed amount of breaths. \\ 
  \midrule
- Breath Count Daily Adherence Score & Number of registered breaths across all treatments for the given day \\
- ~ & out of the prescribed amount of breaths. \\ 
+ Treatment rolling weekly adherence score & Number of completed treatments during the last 7 days (for a given date) out of the prescribed number of treatments for this period. \\
  \midrule
- Treatment Rolling Weekly Adherence Score & Number of completed treatments during the last 7 days (for a given date) \\
- ~ & out of the prescribed number of treatments for this period. \\
+ Breath count rolling weekly adherence score & Number of registered breaths across all treatments during the last 7 days (for a given date) out of the prescribed amount of breaths for this period. \\ 
  \midrule
- Breath Count Rolling Weekly Adherence Score & Number of registered breaths across all treatments during the last 7 days \\
- ~ & (for a given date) out of the prescribed amount of breaths for this period. \\ 
+ Treatment weekly adherence score & Number of completed treatments during the last calendar week (for a given date) out of the prescribed number of treatments for this period. \\
  \midrule
- Treatment Weekly Adherence Score & Number of completed treatments during the last calendar week (for a given date) \\
- ~ & out of the prescribed number of treatments for this period. \\
+ Breath count weekly adherence score & Number of registered breaths across all treatments during the last calendar week(for a given date) out of the prescribed amount of breaths for this period.\\
  \midrule
- Breath Count Weekly Adherence Score & Number of registered breaths across all treatments during the last calendar week \\
- ~ & (for a given date) out of the prescribed amount of breaths for this period.\\
+ Cumulative adherence score & Cumulative adherence score to date. How many in total treatments patient done over a period (since the beginning of the study out the prescribed amount. \\
  \midrule
- Cumulative Adherence Score & Cumulative adherence score to date. \\
- ~ & How many in total treatments patient done over a period (since the beginning of the study out the prescribed amount. \\
+ Breathing time percentage & Percentage of time in a treatment spent on an exhalation \\
  \midrule
- Breathing Time Percentage & Time in a treatment spent on an exhalation, vs not.\\
- \midrule
- Skipped Days Count & Skipped days since the last treatment. \\
+ Skipped days count & Skipped days since the last treatment. \\
  \bottomrule
 \end{longtable}
 
 \section{Appendix : Cluster results and metrics for physical activity data}
 
-The tables below show the metrics for the clusters identified for the physical activity data. 
-
 \subsection{Steps clusters}
 
-\subsubsection{K-Means Clustering}
+\subsubsection{K-means Clustering}
 
 \paragraph{Cluster boundaries}
 Cluster boundaries for the four steps clusters can be seen in Figure \ref{fig:stepsBoundaries}.
@@ -463,7 +430,7 @@ Calinski-harabasz index for the steps clusters is 6021.14 .
 
 \subsubsection{Hierarchical Clustering with complete linkage}
 
-The clustering results using Hierarchical clustering with complete linkage on steps data can be seen in Figure \ref{fig:stepsClustersHC}.
+The clustering results using Hierarchical clustering with complete linkage on steps data displayed using the first two principal components can be seen in Figure \ref{fig:stepsClustersHC}.
 
 \begin{figure}[htb]
   \centering
@@ -511,7 +478,7 @@ Calinski-harabasz index for the heartrate clusters is 5090.37 .
   \caption{Heartrate clusters Metrics Kmeans}
   \label{hr_metrics}
   \centering
-  \begin{tabular}{ |c|c|c|}
+  \begin{tabular}{ c|c|c}
     \toprule
     \cmidrule(r){1-2}
     Cluster name & Cluster Size & Average Silhouette width \\
@@ -527,7 +494,7 @@ Calinski-harabasz index for the heartrate clusters is 5090.37 .
 
 \subsubsection{Hierarchical Clustering with complete linkage}
 
-The clustering results using Hierarchical clustering with complete linkage for the heartrate data can be seen in Figure \ref{fig:hrClustersHC}.
+The clustering results using Hierarchical clustering with complete linkage for the heartrate data displayed using the first two principal component can be seen in Figure \ref{fig:hrClustersHC}.
 
 \begin{figure}[htb]
   \centering
@@ -542,7 +509,7 @@ Calinski-Harabasz index for the heartrate clusters is 135.51 .
   \caption{Heartrate clusters Metrics HC}
   \label{hr_metrics}
   \centering
-  \begin{tabular}{ |c|c|c|}
+  \begin{tabular}{ c|c|c}
     \toprule
     \cmidrule(r){1-2}
     Cluster number & Cluster Size & Average Silhouette width \\
@@ -593,20 +560,18 @@ Clustering with number clusters k=4 has combination of good performance (Average
   \caption{ACT Clusters interpretation}
   \label{tab:act_interpret}
   \centering
-  \begin{tabular}{ c|l}
+  \begin{tabular}{ c|d}
     \toprule
     
-  \textbf{Feature Name} & \textbf{Feature description} \\
+  \textbf{Cluster} & \textbf{Cluster Interpretation} \\
   \midrule
     1 & Treatments with exceptionally big breath counts and biggest treatment adherence \\
   \midrule
     2 & Breath counts weekly adherence is on a lower side, treatments are short \\
   \midrule
-    3 & Good breath counts and related breath weekly adherence, the breaths themselves have big standard  \\ 
-    ~ &  deviation of duration \\
+    3 & Good breath counts and related breath weekly adherence, the breaths themselves have big standard deviation of duration \\
   \midrule
-    4 & Very good breath counts and related breath weekly adherence,  breaths are mostly short and powerful \\ 
-    ~ & (with biggest standard deviation for amplitude), shorter treatments  \\
+    4 & Very good breath counts and related breath weekly adherence,  breaths are mostly short and powerful (with biggest standard deviation for amplitude), shorter treatments  \\
   \bottomrule
     \end{tabular}
 \end{table}
@@ -657,5 +622,18 @@ We assessed the validity of the clusters by adding or removing features and chec
   \includegraphics[]{ACTclusteringAB.png}
   \label{fig:ACTclusteringAB}
 \end{figure}
+
+
+
+\section{Appendix : ACT clustering with different data partitions}
+We assessed the clustering stability on different data partitions. Random sampling 80~\% of the data and clustering using k-means provided very similar results with clustering on the full dataset: figure \ref{fig:ACTclusteringon80} shows that the shape of the clusters, cluster centroids as well as Silhouette Coefficients and Calinski-Harabaz Index (2200 v 1770 respectively) were comparable. 
+
+\begin{figure}[!htb]
+  \centering
+  \caption{K-means clustering results on full dataset (left) and subset of data (right).}
+  \includegraphics[]{ACTclusteringOn80.png}
+  \label{fig:ACTclusteringon80}
+\end{figure}
+
 
 \end{document}
